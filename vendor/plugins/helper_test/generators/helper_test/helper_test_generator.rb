@@ -1,4 +1,4 @@
-class HelperTestGenerator < Rails::Generator::NamedBase  
+class HelperTestGenerator < Rails::Generator::NamedBase
 
   attr_reader :helper_class_name, :directory_slashes
 
@@ -10,7 +10,7 @@ class HelperTestGenerator < Rails::Generator::NamedBase
   def manifest
     record do |m|
       m.template 'helper_testcase.rb', 'test/helper_testcase.rb'
-      
+
       output_path = File.join('test/unit/helpers', "#{@helper_class_name.underscore}_helper_test.rb")
       m.directory File.join(File.dirname(output_path))
 

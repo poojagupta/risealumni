@@ -3,15 +3,15 @@ class AccountsController < ApplicationController
   skip_after_filter :store_location
   #before_filter :check_email ,:only => [:signup]
   cache_sweeper :profile_sweeper, :only => [:confirmation_email]
-  
+
   def login
     redirect_back_or_default(home_path) and return if @u
     @user = User.new
     return unless request.post?
     #plays double duty login/forgot (due to the ajax nature of the login/forgot form)
-    if params[:new_password] 
+    if params[:new_password]
       u = Profile.find_by_email(params[:profile][:email]).user rescue nil
-      if u.nil? 
+      if u.nil?
         flash.now[:error] = "Could not find that email address. Try again."
         render :action => 'forgot_password'
         return
@@ -63,7 +63,7 @@ class AccountsController < ApplicationController
           :last_name => @f_user.last_name, :gender => @f_user.sex.titleize}
         return
       elsif params[:fb_user] && facebook_user.nil?
-        redirect_to home_url and  return 
+        redirect_to home_url and  return
       else
         return
       end
@@ -132,7 +132,7 @@ class AccountsController < ApplicationController
       end
     end
   end
-  
+
   def forgot_password
   end
 
@@ -163,7 +163,7 @@ class AccountsController < ApplicationController
       redirect_to login_path
     end
   end
-  
+
   def check_email
     p = Profile.find_by_email(params[:email])
     render :update do |page|
@@ -174,7 +174,7 @@ class AccountsController < ApplicationController
       end
     end
   end
-  
+
   def check_login
     user = User.find_by_login(params[:login])
     render :update do |page|

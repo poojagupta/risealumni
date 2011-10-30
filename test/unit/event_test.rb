@@ -7,18 +7,18 @@ class EventTest < ActiveSupport::TestCase
   should_have_many :profiles,:organizers,
                    :attending,:not_attending,
                    :may_be_attending, :through => :profile_events
-                 
+
   def test_list
     e = events(:event1)
     assert_not_nil e.list('Attending')
   end
-  
+
   def test_responded
     e = events(:event1)
     p = profiles(:user)
     assert e.responded?(p)
   end
-  
+
   def test_set_organizer
     e = events(:event1)
     p = profiles(:user2)
@@ -32,5 +32,5 @@ class EventTest < ActiveSupport::TestCase
     e = events(:event1)
     assert e.marker=({:lat => '0',:lng => '0'})
   end
- 
+
 end

@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/test_helper")
 
 class FlashersControllerTest < ActionController::TestCase
-  
+
   def test_flash_available_after_request
     get :index, :actual_flash => 'hello'
     assert_equal 'hello', flash[:actual_flash]
@@ -24,8 +24,8 @@ class FlashersControllerTest < ActionController::TestCase
   end
 
   def test_flash_not_available_after_request_via_flashed
-    # Flash variables are not available via _flashed_ after the request has 
-    # finished because they have not yet been discarded. Only discarded 
+    # Flash variables are not available via _flashed_ after the request has
+    # finished because they have not yet been discarded. Only discarded
     # key/value pairs are available via _flashed_
     flashback
     get :index, :actual_flash => 'hello'

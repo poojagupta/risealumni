@@ -10,7 +10,7 @@
   <%= p.labelled_text_field('Maiden Name',:maiden_name, :wrap_class => cycle(:row_light2, :row_dark2)) %>
   <%= p.labelled_collection_select('Gender',:gender,Profile::GENDER_FIELDS,:first, :first, {:wrap_class => cycle(:row_light2, :row_dark2), :include_blank => true}) %>
   <%= p.labelled_collection_select('Blood Group',:blood_group,Profile::BLOOD_GROUPS,:first, :first, {:wrap_class => cycle(:row_light2, :row_dark2), :include_blank => true}) %>
-  <%= p.labelled_collection_select("Groups", :group, GROUPS.reject{|obj| GROUPS.first==obj},:first, :first,:wrap_class => cycle(:row_light2, :row_dark2)) %>                                  
+  <%= p.labelled_collection_select("Groups", :group, GROUPS.reject{|obj| GROUPS.first==obj},:first, :first,:wrap_class => cycle(:row_light2, :row_dark2)) %>
   <%= p.labelled_collection_select('House Name',:house_name,HOUSE_NAMES,:first, :first, {:wrap_class => cycle(:row_light2, :row_dark2), :include_blank => true}) %>
   <%= p.labelled_text_field('Date of Birth',:date_of_birth, :class => "datefield datebalks" ,:wrap_class => cycle(:row_light2, :row_dark2)) %>
   <%= p.labelled_collection_select('Relationship Status',:relationship_status,Profile::RELATIONSHIP_STATUS,:first, :first, {:wrap_class => cycle(:row_light2, :row_dark2), :include_blank => true}) %>

@@ -3,7 +3,7 @@ module FeedItemsHelper
   def x_feed_link feed_item
     link_to_remote image_tag('delete.png', :class => 'delete'), :url => profile_feed_item_path(@profile, feed_item), :method => :delete
   end
-  
+
   def commentable_text comment, in_html = true
     parent = comment.commentable
     case parent.class.name

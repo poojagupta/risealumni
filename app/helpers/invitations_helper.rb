@@ -18,7 +18,7 @@ module InvitationsHelper
   end
 
   def remote_image_submit_tag(source,options)
-    options[:with] ||= 'Form.serialize(this.form)'  
+    options[:with] ||= 'Form.serialize(this.form)'
     options[:html] ||= {}
     options[:html][:type] = 'image'
     options[:html][:onclick] = "#{remote_function(options)}; return false;"

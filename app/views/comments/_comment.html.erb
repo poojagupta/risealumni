@@ -14,7 +14,7 @@ c = comment.comment.dup.gsub(/\[youtube:+.+\]/, '')
     <div class="comment_text"><%= sanitize(textilize(c)) %></div>
   </div>
   <% if !comment.blank? && @p && check_comment(comment) %>
-    <%= link_to_remote image_tag('delete.png', :class => 'delete'), 
+    <%= link_to_remote image_tag('delete.png', :class => 'delete'),
         :url => delete_comment_path(comment), :method => :delete %>
   <% end %>
 </div>

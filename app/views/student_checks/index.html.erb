@@ -6,14 +6,14 @@
   <br /><br />
   <%=  display_alpha_index(StudentCheck.alpha_index) unless @student_checks.blank? %>
   <br /><br />
-  <%= link_to image_tag("user_add.png", 
-                        :title => 'New Student Check', 
-                        :alt => 'New Student Check'), 
+  <%= link_to image_tag("user_add.png",
+                        :title => 'New Student Check',
+                        :alt => 'New Student Check'),
               new_student_check_path %>
-  <%= link_to image_tag("lightning_go.png", 
-                        :title => 'Send Invite to All', 
-                        :alt => 'Send Invite to All'), 
-              send_bulk_invite_student_checks_path, 
+  <%= link_to image_tag("lightning_go.png",
+                        :title => 'Send Invite to All',
+                        :alt => 'Send Invite to All'),
+              send_bulk_invite_student_checks_path,
               :method => :post, :confirm => 'Send email to ALL?' %>
   <table>
     <tr>

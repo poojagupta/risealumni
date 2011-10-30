@@ -13,13 +13,13 @@
                                                                                                                                                             :method =>:post,:with =>"'event_rsvp='+this.value",
                                                                                                                                                             :loading =>" $('spinner_#{event.id}').show();",
                                                                                                                                                             :complete =>"$('spinner_#{event.id}').hide();")%>">Not Attending</input></div>
-    <div><input type="radio" name="event_rsvp" value="May Be Attending" <%= (role == 'May Be Attending') ? 'checked=checked' : '' %> onclick="<%= remote_function(:url => rsvp_path(event.id,status),  
+    <div><input type="radio" name="event_rsvp" value="May Be Attending" <%= (role == 'May Be Attending') ? 'checked=checked' : '' %> onclick="<%= remote_function(:url => rsvp_path(event.id,status),
                                                                                                                                                                   :method =>:post,:with =>"'event_rsvp='+this.value",
                                                                                                                                                                   :loading =>" $('spinner_#{event.id}').show();",
                                                                                                                                                                   :complete =>"$('spinner_#{event.id}').hide()")%>">May Be Attending</input></div>
-                                                                                                                                                               
-     
+
+
   </div>
- 
+
 </form>
 <div  id="spinner_<%= event.id%>" style="display: none;"><%= image_tag('spinner.gif') %></div>

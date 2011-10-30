@@ -5,8 +5,8 @@
 <div class="event_location">
   <span class="event_address">Your RSVP :&nbsp;&nbsp;</span>
   <span><%= pe.is_organizer? ? 'Attending':role %>&nbsp;</span>
-  <%= link_to_function(image_tag('edit.png', :title => "Change RSVP"), 
-                       "Element.show('rsvp_#{event.id}')", 
+  <%= link_to_function(image_tag('edit.png', :title => "Change RSVP"),
+                       "Element.show('rsvp_#{event.id}')",
                        :id => "#{event.id}")unless pe.is_organizer?%>
 </div>
 <div id = "rsvp_<%= event.id%>" style="display: none;">

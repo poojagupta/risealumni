@@ -2,7 +2,7 @@ require "#{File.dirname(__FILE__)}/../test_helper"
 
 class UserProfileTest < ActionController::IntegrationTest
   fixtures :all
- 
+
   def test_truth
     user = user_test
     user.try_to_login
@@ -17,10 +17,10 @@ class UserProfileTest < ActionController::IntegrationTest
     user.change_password
     user.add_comments
   end
-  
+
   private
- 
-  def user_test  
+
+  def user_test
     open_session do |user|
       def user.try_to_login
         get "/login"
@@ -54,7 +54,7 @@ class UserProfileTest < ActionController::IntegrationTest
         assert flash[:notice] = "Settings have been saved."
         assert_redirected_to edit_profile_path(assigns(:profile))
       end
-      
+
       def user.edit_permission
         get edit_account_profile_path(assigns(:p))
         assert_template 'edit_account'
@@ -62,14 +62,14 @@ class UserProfileTest < ActionController::IntegrationTest
         assert flash[:notice] = "Settings have been saved."
         assert_redirected_to edit_account_profile_url(assigns(:profile))
       end
-      
+
       def user.try_to_request_new_email_with_invalid_format
         get edit_account_profile_path(assigns(:p))
         assert_template 'edit_account'
         put profile_path(assigns(:p)), :switch => 'request_email',:user => {:requested_new_email => 'pooja.gupta@gmail'}
         #assert flash.now[:error] = assigns(:user).errors
       end
-      
+
       def user.request_new_email
         get edit_account_profile_path(assigns(:p))
         assert_template 'edit_account'
@@ -77,7 +77,7 @@ class UserProfileTest < ActionController::IntegrationTest
         assert flash[:notice] = "Email change request has been sent at your email."
         assert_redirected_to edit_account_profile_url(assigns(:profile))
       end
-    
+
       def user.try_to_change_password
         get edit_account_profile_path(assigns(:p))
         assert_template 'edit_account'
@@ -104,5 +104,5 @@ class UserProfileTest < ActionController::IntegrationTest
         post profile_comments_path(assigns(:u)), {:profile_id => assigns(:p),  :format => 'js', :comment => {:comment => 'test'}}
       end
     end
-  end 
+  end
 end

@@ -2,12 +2,12 @@
   <div class="edit_panel_profile">
     <% form_for @user, :url => login_path, :method => :post do |f| %>
       <% f.label_class = 'label_margin' %>
-      <%= f.labelled_text_field("Username", 
-                                :login, 
+      <%= f.labelled_text_field("Username",
+                                :login,
                                 :wrap_class => cycle('row_dark','row_light')) %>
       <%= f.labelled_password_field("Password",
                                     :password,
-                                    :wrap_class => cycle('row_dark','row_light')) %>    
+                                    :wrap_class => cycle('row_dark','row_light')) %>
       <div class="editfield_div2">
         <label>
           <%= check_box_tag 'remember_me', 1, false, :name => 'user[remember_me]', :class => "login_checkbox" %>Remember me

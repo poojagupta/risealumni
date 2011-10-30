@@ -17,14 +17,14 @@ class AnnouncementsControllerTest < ActionController::TestCase
   def test_should_create_announcement
     assert_difference('Announcement.count') do
       @request.session[:user] = users(:admin).id
-      post :create, :announcement => { :starts_at => Date.today, 
-                                       :ends_at => Date.today+2.days, 
+      post :create, :announcement => { :starts_at => Date.today,
+                                       :ends_at => Date.today+2.days,
                                        :message => 'some message' }
     end
 
     assert_redirected_to announcements_path
   end
-  
+
   def test_should_not_create_announcement
     @request.session[:user] = users(:admin).id
     post :create, :announcement => { }
@@ -48,8 +48,8 @@ class AnnouncementsControllerTest < ActionController::TestCase
     put :update, :id => announcements(:one).id, :announcement => {:message => 'Due to same' }
     assert_equal('Announcement was successfully updated.',flash[:notice])
     assert_redirected_to announcements_path
-  end 
-  
+  end
+
   def test_should_not_update_announcement
     @request.session[:user] = users(:admin).id
     put :update, :id => announcements(:one).id, :announcement => {:message => nil }

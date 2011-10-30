@@ -1,7 +1,7 @@
 class FeedItemsController < ApplicationController
   skip_filter :store_location
   before_filter :setup
-  
+
   def destroy
     @feed = @profile.feeds.find(:first, :conditions => {:feed_item_id=>params[:id]})
     @feed.destroy if @feed
@@ -13,13 +13,13 @@ class FeedItemsController < ApplicationController
       wants.js { render(:update){|page| page.visual_effect :fade, "feed_item_#{params[:id]}".to_sym}}
     end
   end
-  
+
   protected
-  
+
   def allow_to
     super :user, :only => [:destroy]
   end
-  
+
   def setup
     @profile = Profile[params[:profile_id]]
     if @p != @profile

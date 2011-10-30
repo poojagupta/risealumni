@@ -10,7 +10,7 @@ class RenameColumnToPoll < ActiveRecord::Migration
   end
 
   def self.down
-    rename_column :polls, :question, :title 
+    rename_column :polls, :question, :title
     add_column :polls, :repeat_votes
     rename_column :poll_options, :option, :question
     change_column :polls, :status, :string

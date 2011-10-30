@@ -7,7 +7,7 @@
  * @author Blake Watters
  * @copyright Copyright © 2006, Blake Watters, All rights reserved.
  */
- 
+
 tinyMCE.importPluginLanguagePack('codeblock', 'en');
 var TinyMCE_CodeblockPlugin = {
 
@@ -41,7 +41,7 @@ var TinyMCE_CodeblockPlugin = {
                 var currentNode = tinyMCE.selectedElement;
 
                 // alert("Selected node: " + currentNode.nodeName.toLowerCase());
-                
+
                 var n = currentNode;
                 while(n.nodeName.toLowerCase() != 'body') {
                     if(n.nodeName.toLowerCase() == 'pre') {
@@ -49,21 +49,21 @@ var TinyMCE_CodeblockPlugin = {
                     }
                     n = n.parentNode;
                 }
-                
+
                 if(n.nodeName.toLowerCase() != 'body') {
                     if(currentNode == n) {
                         //alert("I am a codeblock.");
                         onlyChild = (currentNode.childNodes.length == 1);
-                    
+
                         tinyMCE.execInstanceCommand(editor_id, 'mceRemoveNode', false);
-                        
+
                         if(onlyChild){
 														tinyMCE.execInstanceCommand(editor_id, 'FormatBlock', false, "<pre>");
 														tinyMCE.execInstanceCommand(editor_id, 'FormatBlock', false, "<code>");
 												}
                     }else {
                         //alert("My parent is a codeblock.");
-                    
+
                         var codeblock = n;
                         var parent = codeblock.parentNode;
 

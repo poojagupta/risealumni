@@ -4,9 +4,9 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.xml
   def index
-    @polls = Poll.paginate_all_by_profile_id(@profile, 
-                                             :order => 'created_at desc', 
-                                             :page => params[:page], 
+    @polls = Poll.paginate_all_by_profile_id(@profile,
+                                             :order => 'created_at desc',
+                                             :page => params[:page],
                                              :per_page => POLLS_PER_PAGE)
     if @p && @p == @profile && @p.polls.empty?
       flash[:notice] = 'You have not create any polls. Try creating one now.'
@@ -34,7 +34,7 @@ class PollsController < ApplicationController
   # GET /polls/new.xml
   def new
     @poll = @p.polls.new
-   
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @poll }
@@ -50,7 +50,7 @@ class PollsController < ApplicationController
   # POST /polls.xml
   def create
      @poll = @p.polls.build(params[:poll])
-     
+
      respond_to do |format|
       if @poll.save
         params[:poll][:poll_option_attributes] ||= {}
@@ -93,7 +93,7 @@ class PollsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def poll_close
     @poll = @p.polls.find(params[:id])
     @poll.update_attributes(:status => false)
@@ -102,17 +102,17 @@ class PollsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-    
+
   protected
-  
+
   def setup
     @profile = Profile[params[:profile_id]]
     @user = @profile.user
   end
-    
+
   def allow_to
-    super :owner, :all => true 
+    super :owner, :all => true
     super :active_user, :only => [:index, :show]
   end
-  
+
 end

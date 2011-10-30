@@ -39,7 +39,7 @@ class FriendsControllerTest < ActionController::TestCase
     assert profiles(:user2).friend_of?(profiles(:user))
     assert !profiles(:user2).followed_by?(profiles(:user))
   end
-  
+
   should "error while trying to make an invalid friendship" do
     Friend.destroy_all
     post :create, {:profile_id => profiles(:user).id, :id => profiles(:user).id, :format=>'js'}, {:user=>profiles(:user).id}
@@ -48,13 +48,13 @@ class FriendsControllerTest < ActionController::TestCase
     profiles(:user).reload
     profiles(:user2).reload
   end
-  
+
   should " not make friends when not logged in" do
     post :create, {:profile_id => profiles(:user).id, :id => profiles(:user).id, :format=>'js'}
     assert_redirected_to login_path
   end
-  
-  
+
+
   should "not make friend(not providing invited id) " do
     post :create, {:profile_id => profiles(:user).id, :format=>'js'}, {:user=>profiles(:user).id}
     assert_response :success
@@ -63,8 +63,8 @@ class FriendsControllerTest < ActionController::TestCase
     profiles(:user2).reload
   end
 
-  
-  
+
+
 =begin
 
 should "not make friend(when invited person is inactive) " do
@@ -75,8 +75,8 @@ should "not make friend(when invited person is inactive) " do
     profiles(:user2).reload
   end
 =end
-  
-  
+
+
 
   should 'stop following' do
     Friend.destroy_all

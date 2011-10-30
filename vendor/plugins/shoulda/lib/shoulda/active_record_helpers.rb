@@ -8,9 +8,9 @@ module ThoughtBot # :nodoc:
     #     should_require_attributes :name, :phone_number
     #     should_not_allow_values_for :phone_number, "abcd", "1234"
     #     should_allow_values_for :phone_number, "(123) 456-7890"
-    #     
+    #
     #     should_protect_attributes :password
-    #     
+    #
     #     should_have_one :profile
     #     should_have_many :dogs
     #     should_have_many :messes, :through => :dogs
@@ -24,7 +24,7 @@ module ThoughtBot # :nodoc:
       # Requires an existing record.
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/blank/</tt>
       #
       # Example:
@@ -34,7 +34,7 @@ module ThoughtBot # :nodoc:
         message = get_options!(attributes, :message)
         message ||= /blank/
         klass = model_class
-        
+
         attributes.each do |attribute|
           should "require #{attribute} to be set" do
             object = klass.new
@@ -50,7 +50,7 @@ module ThoughtBot # :nodoc:
       # Requires an existing record
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/taken/</tt>
       #
       # Example:
@@ -59,32 +59,32 @@ module ThoughtBot # :nodoc:
       def should_require_unique_attributes(*attributes)
         message, scope = get_options!(attributes, :message, :scoped_to)
         message ||= /taken/
-        
+
         klass = model_class
         attributes.each do |attribute|
           attribute = attribute.to_sym
           should "require unique value for #{attribute}#{" scoped to #{scope}" if scope}" do
             assert existing = klass.find(:first), "Can't find first #{klass}"
             object = klass.new
-            
+
             object.send(:"#{attribute}=", existing.send(attribute))
             if scope
               assert_respond_to object, :"#{scope}=", "#{klass.name} doesn't seem to have a #{scope} attribute."
               object.send(:"#{scope}=", existing.send(scope))
             end
-            
+
             assert !object.valid?, "#{klass.name} does not require a unique value for #{attribute}."
             assert object.errors.on(attribute), "#{klass.name} does not require a unique value for #{attribute}."
-            
+
             assert_contains(object.errors.on(attribute), message)
-            
+
             if scope
               # Now test that the object is valid when changing the scoped attribute
               # TODO:  actually find all values for scope and create a unique one.
               object.send(:"#{scope}=", existing.send(scope).nil? ? 1 : existing.send(scope).next)
               object.errors.clear
               object.valid?
-              assert_does_not_contain(object.errors.on(attribute), message, 
+              assert_does_not_contain(object.errors.on(attribute), message,
                                       "after :#{scope} set to #{object.send(scope.to_sym)}")
             end
           end
@@ -112,12 +112,12 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-  
+
       # Ensures that the attribute cannot be set to the given values
       # Requires an existing record
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/invalid/</tt>
       #
       # Example:
@@ -137,12 +137,12 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-  
+
       # Ensures that the attribute can be set to the given values.
       # Requires an existing record
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/invalid/</tt>
       #
       # Example:
@@ -166,9 +166,9 @@ module ThoughtBot # :nodoc:
       # Requires an existing record
       #
       # Options:
-      # * <tt>:short_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:short_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/short/</tt>
-      # * <tt>:long_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:long_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/long/</tt>
       #
       # Example:
@@ -178,7 +178,7 @@ module ThoughtBot # :nodoc:
         short_message, long_message = get_options!([opts], :short_message, :long_message)
         short_message ||= /short/
         long_message  ||= /long/
-        
+
         klass = model_class
         min_length = range.first
         max_length = range.last
@@ -193,7 +193,7 @@ module ThoughtBot # :nodoc:
             assert_contains(object.errors.on(attribute), short_message, "when set to \"#{min_value}\"")
           end
         end
-    
+
         max_value = "x" * (max_length + 1)
         should "not allow #{attribute} to be more than #{max_length} chars long" do
           assert object = klass.find(:first), "Can't find first #{klass}"
@@ -202,15 +202,15 @@ module ThoughtBot # :nodoc:
           assert object.errors.on(attribute), "There are no errors set on #{attribute} after being set to \"#{max_value}\""
           assert_contains(object.errors.on(attribute), long_message, "when set to \"#{max_value}\"")
         end
-      end    
+      end
 
       # Ensure that the attribute is in the range specified
       # Requires an existing record
       #
       # Options:
-      # * <tt>:low_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:low_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/included/</tt>
-      # * <tt>:high_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:high_message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/included/</tt>
       #
       # Example:
@@ -220,7 +220,7 @@ module ThoughtBot # :nodoc:
         low_message, high_message = get_options!([opts], :low_message, :high_message)
         low_message  ||= /included/
         high_message ||= /included/
-        
+
         klass = model_class
         min   = range.first
         max   = range.last
@@ -258,13 +258,13 @@ module ThoughtBot # :nodoc:
           object.save
           assert_does_not_contain(object.errors.on(attribute), high_message, "when set to \"#{v}\"")
         end
-      end    
-      
+      end
+
       # Ensure that the attribute is numeric
       # Requires an existing record
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/number/</tt>
       #
       # Example:
@@ -286,7 +286,7 @@ module ThoughtBot # :nodoc:
       end
 
       # Ensures that the has_many relationship exists.
-      # 
+      #
       # Options:
       # * <tt>:through</tt> - association name for <tt>has_many :through</tt>
       #
@@ -310,7 +310,7 @@ module ThoughtBot # :nodoc:
               assert through_reflection, "#{klass.name} does not have any relationship to #{through}"
               assert_equal(through, reflection.options[:through])
             end
-            
+
             unless reflection.options[:through]
               # This is not a through association, so check for the existence of the foreign key on the other table
               if reflection.options[:foreign_key]
@@ -327,7 +327,7 @@ module ThoughtBot # :nodoc:
         end
       end
 
-      # Ensures that the has_and_belongs_to_many relationship exists.  
+      # Ensures that the has_and_belongs_to_many relationship exists.
       #
       #   should_have_and_belong_to_many :posts, :cars
       #
@@ -341,7 +341,7 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-  
+
       # Ensure that the has_one relationship exists.
       #
       #   should_have_one :god # unless hindu
@@ -354,7 +354,7 @@ module ThoughtBot # :nodoc:
             reflection = klass.reflect_on_association(association)
             assert reflection, "#{klass.name} does not have any relationship to #{association}"
             assert_equal :has_one, reflection.macro
-            
+
             if reflection.options[:foreign_key]
               fk = reflection.options[:foreign_key]
             elsif reflection.options[:as]
@@ -363,11 +363,11 @@ module ThoughtBot # :nodoc:
               fk = klass.name.foreign_key
             end
             associated_klass = (reflection.options[:class_name] || association.to_s.classify).constantize
-            assert associated_klass.column_names.include?(fk.to_s), "#{associated_klass.name} does not have a #{fk} foreign key."            
+            assert associated_klass.column_names.include?(fk.to_s), "#{associated_klass.name} does not have a #{fk} foreign key."
           end
         end
       end
-  
+
       # Ensure that the belongs_to relationship exists.
       #
       #   should_belong_to :parent
@@ -389,7 +389,7 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-      
+
       # Ensure that the given class methods are defined on the model.
       #
       #   should_have_class_methods :find, :destroy
@@ -436,10 +436,10 @@ module ThoughtBot # :nodoc:
       end
 
       # Ensure that the given column is defined on the models backing SQL table.  The options are the same as
-      # the instance variables defined on the column definition:  :precision, :limit, :default, :null, 
+      # the instance variables defined on the column definition:  :precision, :limit, :default, :null,
       # :primary, :type, :scale, and :sql_type.
       #
-      #   should_have_db_column :email, :type => "string", :default => nil,   :precision => nil, :limit    => 255, 
+      #   should_have_db_column :email, :type => "string", :default => nil,   :precision => nil, :limit    => 255,
       #                                 :null => true,     :primary => false, :scale     => nil, :sql_type => 'varchar(255)'
       #
       def should_have_db_column(name, opts = {})
@@ -454,11 +454,11 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-      
+
       # Ensures that the model cannot be saved if one of the attributes listed is not accepted.
       #
       # Options:
-      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.  
+      # * <tt>:message</tt> - value the test expects to find in <tt>errors.on(:attribute)</tt>.
       #   Regexp or string.  Default = <tt>/must be accepted/</tt>
       #
       # Example:
@@ -468,7 +468,7 @@ module ThoughtBot # :nodoc:
         message = get_options!(attributes, :message)
         message ||= /must be accepted/
         klass = model_class
-    
+
         attributes.each do |attribute|
           should "require #{attribute} to be accepted" do
             object = klass.new
@@ -480,9 +480,9 @@ module ThoughtBot # :nodoc:
           end
         end
       end
-      
+
       private
-      
+
       include ThoughtBot::Shoulda::Private
     end
   end

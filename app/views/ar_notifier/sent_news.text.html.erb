@@ -36,13 +36,13 @@
       <%Blog.public.date_order('DESC').latest_limit(5).each do |blog|%>
         <p>
            <span style="font-family: Arial, Helvetica, sans-serif;font-size: 10px;color:#D83806;">
-             <%= link_to blog.title,  profile_blog_url(blog.profile, blog), :style=>"font-family: Arial, Helvetica, sans-serif;font-size: 10px;color:#D83806;text-decoration: none;" %>  
+             <%= link_to blog.title,  profile_blog_url(blog.profile, blog), :style=>"font-family: Arial, Helvetica, sans-serif;font-size: 10px;color:#D83806;text-decoration: none;" %>
            </span>
            <span style="font-family: Arial, Helvetica, sans-serif;font-size: 10px;color:#000000;"><%= blog.sent_by %> at <%= blog.updated_at.to_date.to_formatted_s(:rfc822) %></span>
         </p>
         <p style="font-family: Arial, Helvetica, sans-serif;font-size: 10px;">&nbsp;</p>
       <%end%>
-    </td> 
+    </td>
   </tr>
 </table>
 <table width="627" height="29" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#f5f5f5">

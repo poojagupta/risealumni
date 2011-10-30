@@ -1,6 +1,6 @@
 class ProfileEvent < ActiveRecord::Base
-  belongs_to :profile 
-  belongs_to :event 
+  belongs_to :profile
+  belongs_to :event
   validates_presence_of :role
   validates_presence_of :profile
   validates_presence_of :event

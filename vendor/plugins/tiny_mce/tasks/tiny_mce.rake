@@ -17,7 +17,7 @@ namespace :tiny_mce do
         puts "** Successfully installed TinyMCE version #{VERSION}"
       end
     end
-    
+
     task :update do
       puts "Not yet implemented."
     end

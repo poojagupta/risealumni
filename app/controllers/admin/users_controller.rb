@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
     search_results
     render
   end
-  
+
   def update
     @profile = Profile.find(params[:id])
     respond_to do |wants|
@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
       end
     end
   end
-  
+
 =begin
 def destroy
     @profile = Profile.find(params[:id])
@@ -44,11 +44,11 @@ def destroy
   end
 
 =end
-  
+
   private
-  
+
   def allow_to
     super :admin, :all => true
   end
-  
+
 end

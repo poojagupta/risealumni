@@ -19,7 +19,7 @@ Version 0.3.8, 03.11.08
 - changed runner script to be more generic
 
 Version 0.3.1, 15.10.08
-- fixed to autodiscovery code bugs. 
+- fixed to autodiscovery code bugs.
 - introduced Workling::VERSION
 - fixed test suite for the case that no memcache client is installed at all
 - fixed AR reconnecting code for Multicore systems (Thanks Brent)
@@ -27,13 +27,13 @@ Version 0.3.1, 15.10.08
 Version 0.3, 25.09.08
 - added backgroundjob runner
 - added automatic detection of starling, spawn and backgroundjob to set default runner
-- made logging of exceptions more consistent across runners. 
-- added friendlier error message if starling was started on the wrong port. 
-- play nice without fiveruns-memcache-client. 
+- made logging of exceptions more consistent across runners.
+- added friendlier error message if starling was started on the wrong port.
+- play nice without fiveruns-memcache-client.
 - added better documentation in README and RDOC
 
 Version 0.2.5, 02.09.08
-- added automatic setting of spawn runner if the spawn plugin is installed. 
+- added automatic setting of spawn runner if the spawn plugin is installed.
 
 Version 0.2.4, 08.06.08
 - accept both async_ and asynch_ as prefixes for workling method invocation. thank you francois beausoleil!
@@ -41,7 +41,7 @@ Version 0.2.4, 08.06.08
 - re-raise exceptions if there is a problem adding an item to the starling queue. thank you digitalronin!
 - added status script for starling client. thank you andrew carter!
 - applied patches from dave dupre: http://davedupre.com/2008/03/29/ruby-background-tasks-with-starling-part-2/
-  - added threading to starling poller. One polling thread can now be set to run per queue. 
+  - added threading to starling poller. One polling thread can now be set to run per queue.
   - default routing no longer producing queues like a:b:c, this was conflicting with MemCacheClient#stat
   - added handling for memcache exceptions
   - keep the database connection alive
@@ -56,7 +56,7 @@ Version 0.2.1, 14.02.08 rev. 24
 
 Version 0.2, 13.02.08 rev. 21
 - progress bars or returning results now possible with return stores. use these to communicate back from your workling.
-- memory store for testing and starling store added. 
+- memory store for testing and starling store added.
 - now generates uids for workling jobs. these are returned by the runner.
 - extracted Workling::Clients::Starling
 - clearer file structure for workling

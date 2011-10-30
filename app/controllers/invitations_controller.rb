@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
   before_filter :show_panels
   before_filter :setup_user_profile
-  
+
   def index
     redirect_to new_profile_invitation_path
   end
@@ -10,7 +10,7 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(:profile_id => @profile)
   end
 
-  def create    
+  def create
     respond_to do |format|
       format.html do
         @invites = []
@@ -26,13 +26,13 @@ class InvitationsController < ApplicationController
     end
   rescue Exception => e
     flash.now[:error] = 'Seem like there was an error sending your invites'
-    @invitation = Invitation.new(:emails => params[:invitation][:emails])  
+    @invitation = Invitation.new(:emails => params[:invitation][:emails])
     @error = e.to_s
     render :action => :new
   end
 
   private
-  
+
   def setup_user_profile
     @profile = params[:profile_id].to_i == @p.id ? @p : Profile[params[:profile_id]]
     @user = params[:profile_id].to_i == @p.id ? @u : @profile.user

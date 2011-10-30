@@ -64,7 +64,7 @@ class AdminPanelTest < ActionController::IntegrationTest
         assert_response :success
         put admin_event_path(events(:event1)),:event => {:title => 'We will organized a event'}
         assert_equal('Event was successfully updated.',flash[:notice])
-        assert_redirected_to admin_events_path 
+        assert_redirected_to admin_events_path
       end
       def admin.delete_event
         delete admin_event_path(events(:event1).id)

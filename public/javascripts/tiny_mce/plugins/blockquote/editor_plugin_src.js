@@ -6,7 +6,7 @@
  * @author Bit Santos
  * @copyright Copyright © 2006, Bit Santos, All rights reserved.
  */
- 
+
 tinyMCE.importPluginLanguagePack('blockquote', 'en');
 var TinyMCE_BlockquotePlugin = {
 
@@ -41,7 +41,7 @@ var TinyMCE_BlockquotePlugin = {
                 var currentNode = tinyMCE.selectedElement;
 
                 // alert("Selected node: " + currentNode.nodeName.toLowerCase());
-                
+
                 var n = currentNode;
                 while(n.nodeName.toLowerCase() != 'body') {
                     if(n.nodeName.toLowerCase() == 'blockquote') {
@@ -49,19 +49,19 @@ var TinyMCE_BlockquotePlugin = {
                     }
                     n = n.parentNode;
                 }
-                
+
                 if(n.nodeName.toLowerCase() != 'body') {
                     if(currentNode == n) {
                         //alert("I am a blockquote.");
                         onlyChild = (currentNode.childNodes.length == 1);
-                    
+
                         tinyMCE.execInstanceCommand(editor_id, 'mceRemoveNode', false);
-                        
+
                         if(onlyChild)
                             tinyMCE.execInstanceCommand(editor_id, 'FormatBlock', false, "<"+ct+">");
                     }else {
                         //alert("My parent is a blockquote.");
-                    
+
                         var blockquote = n;
                         var parent = blockquote.parentNode;
 

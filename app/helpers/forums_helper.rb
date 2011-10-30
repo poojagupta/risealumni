@@ -1,9 +1,9 @@
 module ForumsHelper
-  
+
   def forum_details(forum)
     "#{forum.posts.count} "+(forum.posts.count == 1 ? "post" : "posts")+" in #{forum.topics.count} "+(forum.topics.count == 1 ? "topic" : "topics")
   end
-  
+
   def forum_last_post_info(forum)
     unless (forum.posts.empty?)
       post = forum.posts.last

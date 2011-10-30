@@ -1,6 +1,6 @@
 <% if me or !@profile.default_status? %>
   <div class="widget_large">
-    <span class="widget_lrg_top"></span>  
+    <span class="widget_lrg_top"></span>
     <%= slide_up_down_header('show','status_message','Status')%>
     <div class="middle_panel_profile">
       <div id="status_message">
@@ -19,7 +19,7 @@
   </div>
 <% end %>
 
-<% cache "profile_#{@profile.id}/profile_#{@profile.id}" do %> 
+<% cache "profile_#{@profile.id}/profile_#{@profile.id}" do %>
   <div class="widget_large" >
     <span class="widget_lrg_top"></span>
     <%= slide_up_down_header('hide','personal_info','Personal Info')%>
@@ -65,7 +65,7 @@
         <div id="education_info" style="display:none;">
           <div class="slidecontent">
             <table width ="540px">
-              <tr align="left" valign="top"> 
+              <tr align="left" valign="top">
                 <th>From</th>
                 <th>To</th>
                 <th>University</th>
@@ -86,10 +86,10 @@
 <%= render :partial => 'polls/list' %>
 <%= render :partial => 'forum_posts/list' %>
 
-<%= render :partial => 'comments/list',:locals => {:with_form => true, :with_wall_to_wall => true} %>  
+<%= render :partial => 'comments/list',:locals => {:with_form => true, :with_wall_to_wall => true} %>
 
-<% cache "profile_#{@profile.id}/profile_flickr_pics_and_video#{@profile.id}",EXPIRE_TIME_IN_MIN.minutes.from_now do %>     
-  <% unless @flickr.blank? %> 
+<% cache "profile_#{@profile.id}/profile_flickr_pics_and_video#{@profile.id}",EXPIRE_TIME_IN_MIN.minutes.from_now do %>
+  <% unless @flickr.blank? %>
     <div class="widget_large">
       <span class="widget_lrg_top"></span>
       <%= slide_up_down_header('show','flickr_picture',"Latest Flickr Pictures: #{@profile.flickr_username}")%>
@@ -117,7 +117,7 @@
 
 <% if @profiles %>
   <div class="widget_large">
-    <span class="widget_lrg_top"></span>  
+    <span class="widget_lrg_top"></span>
     <%= slide_up_down_header('show','google_map','Google Map')%>
     <div class="middle_panel_profile">
       <div id="google_map">

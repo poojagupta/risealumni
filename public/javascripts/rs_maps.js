@@ -29,11 +29,11 @@ function create_draggable_editable_marker()
       document.getElementById("map_lng").value = currMarker.getLatLng().lng();
       document.getElementById("map_lat").value = currMarker.getLatLng().lat();
     });
-    
+
     GEvent.addListener(map,"zoomend", function(oldzoom,newzoom) {
       document.getElementById("map_zoom").value = newzoom;
     });
-    
+
   });
 }
 

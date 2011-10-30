@@ -2,9 +2,9 @@
   <div class="edit_panel_profile">
     <% form_for [@profile,@invitation] do |f| %>
       <% f.label_class = 'label_margin' %>
-      <%= f.labelled_text_area('Enter a list of email addresses separated by commas (,)', 
+      <%= f.labelled_text_area('Enter a list of email addresses separated by commas (,)',
                                :emails,
-                               :title => "Comma Separated List of Emails", 
+                               :title => "Comma Separated List of Emails",
                                :wrap_class => "row_light_large") %>
 
       <div class="invitation_error"><%= @error %></div>

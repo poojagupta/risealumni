@@ -87,15 +87,15 @@ class StudentChecksController < ApplicationController
     flash[:notice] = 'Invite sent.'
     redirect_back_or_default('/admin')
   end
-  
+
   def view_year_students
     year = params[:year]
     @student_check = StudentCheck.new
     respond_to do |format|
       format.js do
         render :update do |page|
-          page.replace_html "profile_field", 
-                            :partial => 'profile', 
+          page.replace_html "profile_field",
+                            :partial => 'profile',
                             :locals => {:year => year}
         end
       end
@@ -104,7 +104,7 @@ class StudentChecksController < ApplicationController
 
 
   private
-  
+
   def allow_to
     super :admin, :all => true
   end

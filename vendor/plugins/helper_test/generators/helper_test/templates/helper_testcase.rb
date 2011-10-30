@@ -28,7 +28,7 @@ class HelperTestCase < Test::Unit::TestCase
 
     # Fake url rewriter so we can test url_for
     @controller.url = ActionController::UrlRewriter.new @request, {}
-    
+
     ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
   end
 

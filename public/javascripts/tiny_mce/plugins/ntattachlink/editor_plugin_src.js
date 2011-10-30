@@ -24,7 +24,7 @@ var TinyMCE_NTAttachLinkPlugin = {
 	execCommand : function(editor_id, element, command, user_interface, value) {
 		switch (command) {
 			case "mceNearTimeAttachLink":
-				Element.hide('formatbar_image');				
+				Element.hide('formatbar_image');
 				Element.hide('formatbar_link');
 				Element.toggleWithHighlight('formatbar_attach');
 				return true;

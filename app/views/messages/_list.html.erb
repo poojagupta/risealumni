@@ -18,7 +18,7 @@ page ||= "sent"
             <%= link_to mail_user.full_name,  mail_user, :class=>"messagebox_profilename_unread"%>
           <% else %>
             <span class="messagebox_profilename_unread"> <%= MAILER_TO_ADDRESS %></span>
-          <%- end -%>          
+          <%- end -%>
           <span class="messagebox_date"><%= time_ago_in_words m.created_at %> ago</span>
           <div class="messagebox_subject"><%= link_to h( m.subject), profile_message_path(@p,m) %></div>
           <div class="messagebox_message_preview">
@@ -26,7 +26,7 @@ page ||= "sent"
           </div>
         </div>
         <%= link_to image_tag('delete.png', :class => 'delete'), profile_message_path(@profile, m), :method => :delete %>
-        
+
       <% end %>
       <div class="message_button_container">
         <a href="javascript:;" class="buttons" onClick="checkUncheckAll_Messages(document.getElementById('message_list'),'yes');"><%= theme_image("select_all.png")%></a>

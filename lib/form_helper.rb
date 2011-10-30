@@ -86,14 +86,14 @@ module EnhancedFormBuilder
 
       add_wrapper_classes!(wrapper_opts, method)
       label = add_label_content(label, method)
-      
+
       add_text_field_color!(html_options, method)
-      
+
       wrap_field(
-        label_for(label, method, label_opts) + ' ' + 
-        collection_select(method,collections, value_method, text_method, options, html_options ) + 
-        add_error_div(method,error_div_opts) + 
-        note, 
+        label_for(label, method, label_opts) + ' ' +
+        collection_select(method,collections, value_method, text_method, options, html_options ) +
+        add_error_div(method,error_div_opts) +
+        note,
         wrapper_opts.delete(:with), wrapper_opts)
     end
 
@@ -112,14 +112,14 @@ module EnhancedFormBuilder
       label = add_label_content(label, method)
 
       wrap_field(
-        label_for(label, method, label_opts) + ' ' + 
-        state_select(method,default_country,options, html_options)  + 
-        add_error_div(method,error_div_opts) + 
-        note, 
-        wrapper_opts.delete(:with), 
+        label_for(label, method, label_opts) + ' ' +
+        state_select(method,default_country,options, html_options)  +
+        add_error_div(method,error_div_opts) +
+        note,
+        wrapper_opts.delete(:with),
         wrapper_opts)
     end
-    
+
     def self.write_label_method_for_country_select(field)
       src = <<-end_src
         def labelled_#{field}(label, method, priority_countries = {},options = {}, html_options = {})
@@ -131,21 +131,21 @@ module EnhancedFormBuilder
             error_div_opts = options.delete(:error_div) || {}
 
             add_class_for_collection_select!(html_options, '#{field}')
-            
+
             add_wrapper_classes!(wrapper_opts, method)
             label = add_label_content(label, method)
 
             add_text_field_color!(options, method)
-            
+
             wrap_field(
-              label_for(label, method, label_opts) + ' '  + #{field}(method, priority_countries,options,html_options)  + add_error_div(method,error_div_opts) + note, 
+              label_for(label, method, label_opts) + ' '  + #{field}(method, priority_countries,options,html_options)  + add_error_div(method,error_div_opts) + note,
             wrapper_opts.delete(:with), wrapper_opts)
         end
       end_src
-      
+
       class_eval src, __FILE__, __LINE__
     end
-    
+
     %w{country_select select}.each { |field| write_label_method_for_country_select field }
 
     # Date select to be labelled as well please

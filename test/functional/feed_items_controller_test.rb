@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class FeedItemsControllerTest < ActionController::TestCase
-  
+
   context 'on DELETE to :destroy while logged in as :owner' do
     should 'remove the feed_item from the database using html' do
       assert_difference "Feed.count", -1 do
@@ -12,8 +12,8 @@ class FeedItemsControllerTest < ActionController::TestCase
         assert_redirected_to profile_path(p)
       end
     end
-  end 
-  
+  end
+
   should 'remove the feed_item from the database using js' do
     assert_difference "Feed.count", -1 do
       p = profiles(:user)
@@ -22,9 +22,9 @@ class FeedItemsControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
-   
+
   context 'on DELETE to :destroy while logged in as :owner' do
-    should 'when p != profile' do   
+    should 'when p != profile' do
       p = profiles(:user)
       f = feed_items(:one)
       delete :destroy, {:profile_id => p.id, :id => f.id}, {:user => users(:user2).id}
@@ -32,5 +32,5 @@ class FeedItemsControllerTest < ActionController::TestCase
       assert_redirected_to profile_path(p)
     end
   end
-  
+
 end

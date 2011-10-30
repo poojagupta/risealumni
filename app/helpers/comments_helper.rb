@@ -1,5 +1,5 @@
 module CommentsHelper
-  
+
   def check_comment(comment)
     return true if @p.id == comment.profile_id
     if comment.commentable_type == 'Blog'
@@ -10,5 +10,5 @@ module CommentsHelper
       return true if @u.is_admin?
     end
   end
-  
+
 end

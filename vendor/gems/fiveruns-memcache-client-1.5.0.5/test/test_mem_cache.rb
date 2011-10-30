@@ -567,7 +567,7 @@ class TestMemCache < Test::Unit::TestCase
     @cache.servers << server
 
     @cache.add 'key', 'value'
-    
+
     dumped = Marshal.dump('value')
 
     expected = "add my_namespace:key 0 0 #{dumped.length}\r\n#{dumped}\r\n"
@@ -629,9 +629,9 @@ class TestMemCache < Test::Unit::TestCase
     server = FakeServer.new
     @cache.servers = []
     @cache.servers << server
-    
+
     @cache.delete 'key'
-    
+
     expected = "delete my_namespace:key 0\r\n"
     assert_equal expected, server.socket.written.string
   end
@@ -640,9 +640,9 @@ class TestMemCache < Test::Unit::TestCase
     server = FakeServer.new
     @cache.servers = []
     @cache.servers << server
-    
+
     @cache.delete 'key', 300
-    
+
     expected = "delete my_namespace:key 300\r\n"
     assert_equal expected, server.socket.written.string
   end

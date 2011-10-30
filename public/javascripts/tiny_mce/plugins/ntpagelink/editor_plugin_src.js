@@ -30,9 +30,9 @@ var TinyMCE_NTPageLinkPlugin = {
 				// TODO - Toggle the editor into toolbar
 				// $$('td.mceToolbarTop')[0].toggle();
 				return true;
-				
+
 			case "mceAddControl":
-				
+
 				return true;
 		}
 

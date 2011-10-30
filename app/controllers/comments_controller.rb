@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   skip_filter :store_location, :only => [:create, :destroy]
   before_filter :setup
-  
+
   def index
     @comments = Comment.between_profiles(@p, @profile).paginate(:page => @page, :per_page => @per_page) # TODO Paginate
     redirect_to @p and return if @p == @profile
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       wants.rss {render :layout=>false}
     end
   end
-  
+
   def create
     @comment = @parent.comments.new(params[:comment].merge(:profile_id => @p.id))
     respond_to do |wants|
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     if comment.commentable_type == 'Blog'
-      blog_comment = true 
+      blog_comment = true
       @blog = Blog.find(comment.commentable_id)
     end
     comment.destroy
@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
         flash[:notice]='comment was deleted.'
         redirect_back_or_default(profiles_path)
       end
-      wants.js do 
+      wants.js do
         render :update do |page|
           page.replace_html "#{dom_id(@blog)}_comment_size", :inline => pluralize(@blog.comments.size,'Comment') if blog_comment
           page.visual_effect :fade, "comment_#{params[:id]}".to_sym
@@ -71,9 +71,9 @@ class CommentsController < ApplicationController
   end
 
   protected
-    
+
   def parent; @blog || @profile ||@event|| nil; end
-    
+
   def setup
     @profile = Profile[params[:profile_id]] if params[:profile_id]
     @user = @profile.user if @profile
@@ -81,7 +81,7 @@ class CommentsController < ApplicationController
     @event = Event.find(params[:event_id]) unless params[:event_id].blank?
     @parent = parent
   end
-  
+
   def allow_to
     super :active_user, :only => [:index, :create,:destroy]
   end

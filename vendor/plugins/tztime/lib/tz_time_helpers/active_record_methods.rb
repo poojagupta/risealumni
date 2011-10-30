@@ -1,7 +1,7 @@
 module TzTimeHelpers
   module ActiveRecordMethods
     # Adds the given list of attributes to a class inheritable array #tz_time_attributes.
-    # All the attributes will have their timezones fixed in a before_save callback, and 
+    # All the attributes will have their timezones fixed in a before_save callback, and
     # will have a getter method created that converts UTC times from the database into a local
     # TzTime.  The getter method is important because TzTime values are saved to the database
     # as UTC.  The getter lets you access the local time without changing your application.
@@ -19,7 +19,7 @@ module TzTimeHelpers
             end
           end
         end
-        
+
         protected
           def fix_timezone
             tz_time_attributes.each do |attribute|

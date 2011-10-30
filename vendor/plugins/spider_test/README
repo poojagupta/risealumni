@@ -8,7 +8,7 @@ It performs a few valuable tasks for you:
   - finds every link to within your site and follows it, whether static or dynamic.
   - finds every Ajax.Updater link and follows it.
   - finds every form and tries to submit it, filling in values where possible.
-  
+
 This is helpful in determining:
 
   - missing static pages (.html)
@@ -25,33 +25,33 @@ USAGE
 $ script/plugin install svn://caboo.se/plugins/court3nay/spider_test
 $ script/generate integration_test spider_test
 
-Load up the test/integration/spider_test.rb and make it look something like this, replacing 
+Load up the test/integration/spider_test.rb and make it look something like this, replacing
 your own implementation details where appropriate.  You'll probably want to load all of your
 fixtures.
 
   require "#{File.dirname(__FILE__)}/../test_helper"
-  
+
   class SpiderTest < ActionController::IntegrationTest
     fixtures :users, :roles, :images, :categories
     include SpiderIntegrator
-  
+
     def test_spider
       get '/'
       assert_response :success
-  
+
       spider(@response.body, '/')
     end
-  
+
   end
 
 If you require a login for your app, you'll need to specifically log in. I do it like:
 
   require "#{File.dirname(__FILE__)}/../test_helper"
-  
+
   class SpiderTest < ActionController::IntegrationTest
     fixtures :users, :roles, :images, :categories
     include SpiderIntegrator
-  
+
     def test_spider
       get '/sessions/new'
       assert_response :success
@@ -60,10 +60,10 @@ If you require a login for your app, you'll need to specifically log in. I do it
       assert_response :redirect
       assert_redirected_to '/'
       follow_redirect!
-  
+
       spider(@response.body, '/')
     end
-  
+
   end
 
 
@@ -72,14 +72,14 @@ Todo:
   - better, aka more random, fuzzing.
     currently, I check the fieldname and change the data types accordingly.  It'd be
     good to have some more advanced algorithm in here
-    
+
   - specify which actions to ignore
     you can modify this by editing the plugin and setting @visited_urls and @visited_forms
     but this should be more easily settable.
 
   - use hpricot instead of html::document
     no clue, really, but I hear hpricot is faster.
-    
+
   x better capturing of errors
     instead of dying each time there's an error, store them all up so the user can fix
     'em all at once.

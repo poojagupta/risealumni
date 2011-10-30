@@ -51,7 +51,7 @@ profile ||= @profile
     <% end %>
     <% if me %>
       <div class="profile_links">
-        <%= link_to 'My Greetings Calendar', 
+        <%= link_to 'My Greetings Calendar',
                     alumni_friends_events_path(:ics) %>
         <br/>
         <%= link_to "Send Invites", new_profile_invitation_path(@p), :method => :get %>

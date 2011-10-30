@@ -67,7 +67,7 @@ module ValidationReflection # :nodoc:
   end
 
 end
-  
+
 ActiveRecord::Base.class_eval do
   include ValidationReflection
 end

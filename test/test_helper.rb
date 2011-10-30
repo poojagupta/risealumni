@@ -32,28 +32,28 @@ class ActiveSupport::TestCase
   # instantiated fixtures translates to a database query per test method),
   # then set this back to true.
   self.use_instantiated_fixtures  = false
-  
+
   fixtures :all
-  
+
   include LessAuthenticationTestHelper
 
   # Add more helper methods to be used by all tests here...
-  
+
   @@association_test_exclusions = %w{LocalizationTest RequestLoggingTest UserPhotosTest
                                     UserPhotoshootPhotosTest PurchasedPhotosTest UserPhotoRatingsTest
                                     PhotoRatingsTest UserCommentsTest PhotoCommentsTest UserPurchasedPhotosTest
                                     ProUsersControllerTest PhotoSizeTest PhotoStoriesTest
                                     GuestTest EmailTest SystemMailerTest}
-  
-  
+
+
   def _test_associations
     return true if ['SpiderTest', 'Controller', 'ActiveSupport', 'ActionMailer'].any?{|x| self.class.to_s.include?(x)} ||
       @@association_test_exclusions.include?(self.class.to_s)
     check_associations(self.class.to_s.gsub('Test', '').constantize)
   end
-  
-  
-  
+
+
+
   def check_associations(m, ignore = [])
     @m = m.new
     ig = [ignore].flatten
@@ -65,15 +65,15 @@ class ActiveSupport::TestCase
     end
     true
   end
-  
-  
-  
-  
-  
-  
-  
-  # 
-  #   
+
+
+
+
+
+
+
+  #
+  #
   #   def test_roles
   #     return unless self.class.to_s.ends_with? 'ControllerTest'
   #     _test_actions self.class.to_s.gsub('ControllerTest', '') do |action|
@@ -120,7 +120,7 @@ class ActiveSupport::TestCase
       yield method
     end
   end
-  
+
   # Teardown and setup - for quick recycling of env. within a single test
   def recycle; teardown; setup; end
 

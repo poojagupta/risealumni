@@ -1,10 +1,10 @@
 class SiteContentSweeper < ActionController::Caching::Sweeper
   observe SiteContent
-  
+
   def after_update(site_content)
     expire_cache
   end
-  
+
   def expire_cache
     expire_fragment 'about_us'
     expire_fragment 'academics'
@@ -15,5 +15,5 @@ class SiteContentSweeper < ActionController::Caching::Sweeper
     expire_fragment 'blurb'
     expire_fragment 'footer'
   end
-  
+
 end

@@ -47,31 +47,31 @@
           $("#TB_overlay").click(tb_remove);
         }
       }
-		
+
       if(tb_detectMacXFF()){
         $("#TB_overlay").addClass("TB_overlayMacFFBGHack");//use png overlay so hide flash
       }else{
         $("#TB_overlay").addClass("TB_overlayBG");//use background and opacity
       }
-		
+
       if(caption===null){
         caption="";
       }
       $("body").append("<div id='TB_load'><img src='"+imgLoader.src+"' /></div>");//add loader to the page
       $('#TB_load').show();//show loader
-		
+
       var baseURL;
       if(url.indexOf("?")!==-1){ //ff there is a query string involved
         baseURL = url.substr(0, url.indexOf("?"));
       }else{
         baseURL = url;
       }
-	   
+
       var urlString = /\.jpg$|\.jpeg$|\.png$|\.gif$|\.bmp$/;
       var urlType = baseURL.toLowerCase().match(urlString);
 
       if(urlType == '.jpg' || urlType == '.jpeg' || urlType == '.png' || urlType == '.gif' || urlType == '.bmp'){//code to show images
-				
+
         TB_PrevCaption = "";
         TB_PrevURL = "";
         TB_PrevHTML = "";
@@ -104,7 +104,7 @@
         imgPreloader = new Image();
         imgPreloader.onload = function(){
           imgPreloader.onload = null;
-				
+
           // Resizing large images - orginal by Christian Montoya edited by me.
           var pagesize = tb_getPageSize();
           var x = pagesize[0] - 150;
@@ -127,13 +127,13 @@
             }
           }
           // End Resizing
-			
+
           TB_WIDTH = imageWidth + 30;
           TB_HEIGHT = imageHeight + 60;
           $("#TB_window").append("<a href='' id='TB_ImageOff' title='Close'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_caption'>"+caption+"<div id='TB_secondLine'>" + TB_imageCount + TB_PrevHTML + TB_NextHTML + "</div></div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton' title='Close'>close</a> or Esc Key</div>");
-			
+
           $("#TB_closeWindowButton").click(tb_remove);
-			
+
           if (!(TB_PrevHTML === "")) {
             function goPrev(){
               if($(document).unbind("click",goPrev)){
@@ -146,7 +146,7 @@
             }
             $("#TB_prev").click(goPrev);
           }
-			
+
           if (!(TB_NextHTML === "")) {
             function goNext(){
               $("#TB_window").remove();
@@ -155,7 +155,7 @@
               return false;
             }
             $("#TB_next").click(goNext);
-				
+
           }
 
           document.onkeydown = function(e){
@@ -178,7 +178,7 @@
               }
             }
           };
-			
+
           tb_position();
           $("#TB_load").remove();
           $("#TB_ImageOff").click(tb_remove);
@@ -186,10 +186,10 @@
             display:"block"
           }); //for safari using css instead of show
         };
-			
+
         imgPreloader.src = url;
       }else{//code to show html
-			
+
         var queryString = url.replace(/^[^\?]+\??/,'');
         var params = tb_parseQuery( queryString );
 
@@ -197,7 +197,7 @@
         TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no paramaters were added to URL
         ajaxContentW = TB_WIDTH - 30;
         ajaxContentH = TB_HEIGHT - 45;
-			
+
         if(url.indexOf('TB_iframe') != -1){// either iframe or ajax window
           urlNoQuery = url.split('TB_');
           $("#TB_iframeContent").remove();
@@ -222,9 +222,9 @@
             $("#TB_ajaxWindowTitle").html(caption);
           }
         }
-					
+
         $("#TB_closeWindowButton").click(tb_remove);
-			
+
         if(url.indexOf('TB_inline') != -1){
           $("#TB_ajaxContent").append($('#' + params['inlineId']).children());
           $("#TB_window").unload(function () {
@@ -253,7 +253,7 @@
             });
           });
         }
-			
+
       }
 
       if(!params['modal']){
@@ -268,7 +268,7 @@
           }
         };
       }
-		
+
     } catch(e) {
     //nothing here
     }

@@ -1,4 +1,4 @@
- 
+
 module GlobalModule
 begin
 Preference.find_all_preferences.keys.each do |key|  # => For the time being cause error running rake task. TODO
@@ -27,7 +27,7 @@ def house_names
   end
   house_name
 end
-  
+
 def titles
   titles = []
   Title.find(:all, :order => 'name').each do |title|

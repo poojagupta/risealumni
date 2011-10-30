@@ -9,5 +9,5 @@ class <%= helper_class_name %>HelperTest < HelperTestCase
   def setup
     super
   end
-  
+
 end

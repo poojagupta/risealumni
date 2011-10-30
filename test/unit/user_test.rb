@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  VALID_USER = {:password=>'123456', 
-    :password_confirmation=>'123456', 
-    :login=>'valid_user', 
-    :profile_attributes => {:email=>'valid_user@example.com', 
+  VALID_USER = {:password=>'123456',
+    :password_confirmation=>'123456',
+    :login=>'valid_user',
+    :profile_attributes => {:email=>'valid_user@example.com',
     :group => '2006',
-    :first_name => 'Rashmi', 
-    :last_name => 'Yadav', 
+    :first_name => 'Rashmi',
+    :last_name => 'Yadav',
     :gender => 'Female'},
     :terms_of_service => '1'}
 
@@ -27,12 +27,12 @@ class UserTest < ActiveSupport::TestCase
       assert u2.valid?
       assert_not_equal(p, u2.crypted_password)
     end
-    
+
     should 'require no spaces between password in order to change password' do
       u = User.find(users(:user).id)
       assert !u.change_password('te st', 'as dfg', 'as dfg')
     end
-    
+
     should 'require the correct length of password in order to change password' do
       u = User.find(users(:user).id)
       assert !u.change_password('tes', 'asdfg', 'asdfg')
@@ -61,7 +61,7 @@ class UserTest < ActiveSupport::TestCase
       assert !u2.valid?
     end
 
-    
+
     should 'reset password if forgotten' do
       p1 = users(:user).crypted_password
       assert users(:user).forgot_password!
@@ -96,11 +96,11 @@ class UserTest < ActiveSupport::TestCase
             :email => 'test@test.com',
             :password => 'test',
             :password_confirmation => 'test',
-            :terms_of_service => '1'     
+            :terms_of_service => '1'
           })
       end
     end
-    
+
     should 'not be created without terms' do
       assert_no_difference "User.count" do
         User.create({
@@ -119,7 +119,7 @@ class UserTest < ActiveSupport::TestCase
         assert u = User.create(VALID_USER)
         assert !u.new_record?, u.errors.full_messages.to_sentence
         assert u.profile
-        
+
       end
     end
   end
@@ -173,61 +173,61 @@ class UserTest < ActiveSupport::TestCase
     assert !users(:cant_message).can_mail?( users(:user))
     assert users(:user).can_mail?( users(:cant_message))
   end
-    
+
   should "be active" do
     u = users(:user)
     assert u.profile.activate!
   end
-  
+
   should " email should be confirmed" do
     u = users(:user)
     assert !u.email_confirmed?
   end
-  
+
   should "last login date" do
     assert_equal Date.today, users(:user).record_login!
   end
-  
+
   should " have reference" do
     u = users(:user)
     assert_not_nil u.matched_referrers
   end
-  
+
   context "should request new email" do
     should " have invaild new email" do
       p = users(:user)
       assert !p.request_email_change!('rays')
     end
-    
+
     should " have blank email" do
       p = users(:user)
       assert !p.request_email_change!('')
     end
-    
+
     should "request new email" do
       p = users(:user)
       assert p.request_email_change!('rays.rashmi@gmail.com')
     end
   end
-  
+
   should 'test full name' do
     u = users(:user)
     assert_not_nil u.full_name
     assert_equal "De Veloper", u.full_name
     assert_not_equal 'De', u.full_name
   end
-  
+
   should 'test full name if first name is nil' do
     u = users(:user5)
     assert_not_nil u.full_name
     assert_equal 'Saxena', u.full_name
   end
-  
+
   should 'test full name if invalid first name or last name' do
     u = users(:user6)
     assert_not_nil u.full_name
   end
-    
+
   #
   #   def test_associations
   #     _test_associations

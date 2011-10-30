@@ -3,7 +3,7 @@
 <% end -%>
 <div id="column_l">
   <h2 class="page_title"><%= @profile.full_name %>'s Polls
-    <%= link_to image_tag('add.png',:title=>"Create New poll"),       
+    <%= link_to image_tag('add.png',:title=>"Create New poll"),
                   new_profile_poll_path(@profile) if me %></h2>
 
   <% if @polls.empty? %>
@@ -13,7 +13,7 @@
     </div>
   <% else %>
     <%= render :partial => 'polls/poll', :collection => @polls %>
-    <div class="clear_div"></div> 
+    <div class="clear_div"></div>
     <%= will_paginate @polls%>
   <% end %>
 </div>

@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PhotosControllerTest < ActionController::TestCase
-  
+
   #VALID_PHOTO = {
   #:image => ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, 'public/images/user.png'), 'image/png')
   #}
 
   context 'on GET to :index while logged in as :admin' do
-    
+
     setup do
       get :index
       @request.session[:user] = users(:admin).id
