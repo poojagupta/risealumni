@@ -10,7 +10,7 @@ class ForumsControllerTest < ActionController::TestCase
       get :index, {}, {:user => profiles(:user).id}
       assert_response 200
       assert_template 'index'
-    end  
+    end
   end
 
   should "get the index as :admin" do
@@ -18,7 +18,7 @@ class ForumsControllerTest < ActionController::TestCase
       get :index, {}, {:user => profiles(:admin).id}
       assert_response 200
       assert_template 'index'
-    end 
+    end
   end
 
 
@@ -30,7 +30,7 @@ class ForumsControllerTest < ActionController::TestCase
       get :show, {:id => forums(:one)}, {:user => profiles(:user).id}
       assert_response 200
       assert_template 'show'
-    end 
+    end
   end
 
   should "get show as :admin" do
@@ -81,7 +81,7 @@ class ForumsControllerTest < ActionController::TestCase
       end
     end
   end
-   
+
   should "not create a new forum for :user .xml" do
     assert_nothing_raised do
       assert_no_difference "Forum.count" do
@@ -136,14 +136,14 @@ class ForumsControllerTest < ActionController::TestCase
       assert_redirected_to :controller => 'forums', :action => 'index' #, :id => forums(:one).to_param
     end
   end
-  
+
   should "not update a forum for :admin" do
     assert_nothing_raised do
       put :update, {:id => forums(:one).id, :forum => unvalid_forum_attributes}, {:user => profiles(:admin).id}
       assert_response 200
     end
   end
-     
+
   should "not update a forum for :user xml" do
     assert_nothing_raised do
       put :update, {:format=>'xml', :id => forums(:one).id, :forum => valid_forum_attributes}, {:user => profiles(:user).id}
@@ -157,7 +157,7 @@ class ForumsControllerTest < ActionController::TestCase
       assert_response 200
     end
   end
-  
+
 
   should "not update a forum for :admin xml" do
     assert_nothing_raised do
@@ -165,7 +165,7 @@ class ForumsControllerTest < ActionController::TestCase
       assert_response 422
     end
   end
-  
+
   ##
   # :destroy
 
@@ -196,7 +196,7 @@ class ForumsControllerTest < ActionController::TestCase
       end
     end
   end
-  
+
   should "change the positions of the forums" do
     assert_no_difference "Forum.count" do
       assert_difference "Forum[forums(:one).id].position", 1 do

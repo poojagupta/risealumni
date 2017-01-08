@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   layout "admin"
-  
+
   def index
     respond_to do |format|
       format.ics do
@@ -13,10 +13,10 @@ class EventsController < ApplicationController
         headers['Content-Type'] = "text/calendar; charset=UTF-8"
         render :layout=> false, :text => @calendar.to_ical
       end
-      format.html 
+      format.html
     end
   end
-  
+
   def alumni_friends
     @friends = @p.all_friends
     respond_to do |format|
@@ -38,9 +38,9 @@ class EventsController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def allow_to
     super :admin, :all => true
     super :active_user, :only => [:alumni_friends]

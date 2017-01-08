@@ -1,13 +1,13 @@
 require 'avatar/source/gravatar_source'
 
 class SizedGravatarSource < Avatar::Source::GravatarSource
-  
+
   alias_method :parse_options_without_size, :parse_options
-  
+
   def self.sizes
     { :small_20 => 20, :small => 50, :small_60 => 60, :medium => 100, :large => 150, :big => 150 }
   end
-  
+
   def parse_options(profile, options)
     #pass :gravatar_size through, but translate :size or :s to a number if possible
     parsed_options = parse_options_without_size(profile, options)
@@ -16,5 +16,5 @@ class SizedGravatarSource < Avatar::Source::GravatarSource
     end
     parsed_options
   end
-  
+
 end

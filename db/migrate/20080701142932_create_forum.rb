@@ -7,7 +7,7 @@ class CreateForum < ActiveRecord::Migration
 
       t.timestamps
     end
-    
+
     create_table :forum_topics do |t|
       t.string :title
       t.integer :forum_id
@@ -16,7 +16,7 @@ class CreateForum < ActiveRecord::Migration
       t.timestamps
     end
     add_index :forum_topics, :forum_id
-    
+
     create_table :forum_posts do |t|
       t.text :body
       t.integer :owner_id

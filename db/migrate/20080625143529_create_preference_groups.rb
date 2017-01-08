@@ -4,9 +4,9 @@ class CreatePreferenceGroups < ActiveRecord::Migration
       t.string :group
       t.timestamps
     end
-    
-    
-    
+
+
+
 
   end
 

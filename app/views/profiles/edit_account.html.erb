@@ -7,26 +7,26 @@
     <%= render :partial => '/shared/fbconnect_button' %>
    <%end%>
 </div>
-<div class="large_panel_side"> 
+<div class="large_panel_side">
   <%= render :partial => "notification"%>
   <% form_for @p, :html=>{:method=>:put, :class=>"none"} do |p| %>
     <% rounded_med_corner(:id => "change_password", :title => "Password", :button => 'change-password.png') do %>
       <div class="<%=cycle(:row_light2, :row_dark2)%>" >
         <label class="label_margin">Current Password</label>
         <input type="password" name="verify_password" id="verify_password" class="text_field" />
-      </div>  
+      </div>
       <div class="<%=cycle(:row_light2, :row_dark2)%>" >
         <label class="label_margin">New Password</label>
         <input type="password" name="new_password" id="new_password" class="text_field" />
-      </div>  
+      </div>
       <div class="<%=cycle(:row_light2, :row_dark2)%>" >
         <label class="label_margin">Confirm Password</label>
         <input type="password" name="confirm_password" id="confirm_password" class="text_field" />
-      </div>  
+      </div>
     <% end %>
     <input type="hidden" name="switch" value="password" />
   <% end %>
-  
+
   <% form_for @p, :html=>{:method=>:put, :class=>"none"} do |p| %>
     <% fields_for :user, @user do |u| %>
       <% rounded_med_corner(:id => "change_email", :title => "Email", :button => 'change-email.png') do %>
@@ -41,16 +41,16 @@
       <% end %>
     <% end %>
     <input type="hidden" name="switch" value="request_email" />
-  <% end %>      
-  
+  <% end %>
+
   <% form_for @p, :html=>{:method=>:put, :class=>"none"} do |p| %>
     <% p.label_class = 'label_margin' %>
     <% rounded_med_corner(:id => "set_default_permission", :title => "Default Permission", :button => 'set-default.png') do %>
       <%= p.labelled_collection_select('Default Permission',
                                        :default_permission,
                                        Profile::PRIVACY_OPTIONS,
-                                       :first, 
-                                       :first, 
+                                       :first,
+                                       :first,
                                        {:wrap => {:class => cycle(:row_light2, :row_dark2)}}) %>
     <% end %>
     <input type="hidden" name="switch" value="set_default_permissions" />

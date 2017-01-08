@@ -1,5 +1,5 @@
 class AccountMailer < ActionMailer::Base
-  
+
   def signup(user)
     @subject         = "[#{SITE_NAME} Signup] #{user.profile.first_name.titlecase}, Thanks for joining!"
     @recipients      = user.profile.email
@@ -9,7 +9,7 @@ class AccountMailer < ActionMailer::Base
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def forgot_password(email, name, login, password)
     @subject         = "[#{SITE_NAME} Notice] Password Reset"
     @body['user']    = [email, name, login, password]
@@ -17,7 +17,7 @@ class AccountMailer < ActionMailer::Base
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def new_email_request(user)
     @subject                   = "[#{SITE_NAME} Notice] New email requested"
     @recipients                = user.requested_new_email
@@ -27,7 +27,7 @@ class AccountMailer < ActionMailer::Base
     @from                      = MAILER_FROM_ADDRESS
     @sent_on                   = Time.new
   end
-  
+
   def email_confirmed_by_user(user)
     @activation               = user.profile.is_active ? 'Activated':'Requires Activation'
     @subject                  = "[#{SITE_NAME} #{@activation}] #{user.profile.full_name} (#{user.profile.group})"
@@ -45,7 +45,7 @@ class AccountMailer < ActionMailer::Base
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def anniversary_greeting(profile)
     @subject         = "Best Wishes on your Anniversary, #{profile.first_name.titlecase}"
     @recipients      = profile.email
@@ -61,5 +61,5 @@ class AccountMailer < ActionMailer::Base
     @from             = MAILER_FROM_ADDRESS
     @sent_on          = Time.new
   end
-  
+
 end

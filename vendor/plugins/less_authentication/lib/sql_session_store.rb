@@ -54,10 +54,10 @@ class SQLSessionStore
 
     # update session data and store it in the database
     def update_session(data)
-      update_attribute('data', data) 
+      update_attribute('data', data)
     end
   end
-  
+
   # The class to be used for creating, retrieving and updating sessions.
   # Defaults to SQLSessionStore::Session, which is derived from +ActiveRecord::Base+.
   #
@@ -69,7 +69,7 @@ class SQLSessionStore
 
   cattr_accessor :session_class
   @@session_class = SQLSessionStore::Session
-  
+
   # Create a new SQLSessionStore instance.
   #
   # +session+ is the session for which this instance is being created.
@@ -84,7 +84,7 @@ class SQLSessionStore
       @data = {}
     end
   end
-  
+
   # Update the database and disassociate the session object
   def close
     if @session
@@ -92,7 +92,7 @@ class SQLSessionStore
       @session = nil
     end
   end
-  
+
   # Delete the current session, disassociate and destroy session object
   def delete
     if @session
@@ -100,26 +100,26 @@ class SQLSessionStore
       @session = nil
     end
   end
-  
+
   # Restore session data from the session object
   def restore
     if @session
       @data = unmarshalize(@session.data)
     end
   end
-  
+
   # Save session data in the session object
   def update
     if @session
       @session.update_session(marshalize(@data))
     end
   end
-  
+
   private
   def unmarshalize(data)
     Marshal.load(Base64.decode64(data))
   end
-  
+
   def marshalize(data)
     Base64.encode64(Marshal.dump(data))
   end

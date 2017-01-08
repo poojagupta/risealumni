@@ -5,8 +5,8 @@
   <% tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| %>
     <span class = <%= css_class %>  >
       <%=  link_to tag.name, blogs_by_tag_path(tag), :method => :get %>
-    </span> 
+    </span>
   <%end%>
-  <div class="clear_div"></div>     
+  <div class="clear_div"></div>
   <span class="widget_small_btm"></span>
 </div>

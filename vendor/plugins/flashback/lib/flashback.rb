@@ -36,18 +36,18 @@ module Glomp
     #     end
     #   end
     #
-    # What you will not have access to via _flashed_ are the normal, 
+    # What you will not have access to via _flashed_ are the normal,
     # inter-request Flash variables. This is because Flashback is only tracking
     # those flash variables that are _discarded_ during the transaction, which
     # includes all variables passed through <em>Flash.now</em>.
     #
-    # If you want _flashed_ available all of the time, then simply call 
-    # _flashback_ in the _setup_ method of your TestCase. There are likely 
-    # better ways that I hope someone will tell me about, but I just wanted to 
+    # If you want _flashed_ available all of the time, then simply call
+    # _flashback_ in the _setup_ method of your TestCase. There are likely
+    # better ways that I hope someone will tell me about, but I just wanted to
     # get this plugin out-the-door.
-    # 
-    # The only caveat to Flashback is that if you define your own Flash instance 
-    # and pass that to your various process methods (get, post, head, etc.), 
+    #
+    # The only caveat to Flashback is that if you define your own Flash instance
+    # and pass that to your various process methods (get, post, head, etc.),
     # your flash will override Flashback's, rendering it useless.
     def flashback
       @request.session['flash'] = FlashedHash.new

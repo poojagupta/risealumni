@@ -18,11 +18,11 @@ class AccountsControllerTest < ActionController::TestCase
   context 'A visitor' do
     should 'be able to signup(exist in the database)' do
       assert_difference "User.count" do
-        xhr :post, :signup, {:user => {:login => 'rashmi123',:password => 'test', :password_confirmation => 'test', 
-            :profile_attributes => {:email => 'rays.yadav@gmail.com',  
-              :first_name => 'Rohit', 
-              :last_name => 'Yadav', 
-              :group => '1997', 
+        xhr :post, :signup, {:user => {:login => 'rashmi123',:password => 'test', :password_confirmation => 'test',
+            :profile_attributes => {:email => 'rays.yadav@gmail.com',
+              :first_name => 'Rohit',
+              :last_name => 'Yadav',
+              :group => '1997',
               :gender => 'Male'} , :terms_of_service => '1'
           }}
         assert assigns['user']
@@ -32,17 +32,17 @@ class AccountsControllerTest < ActionController::TestCase
         #do_login_assertion
       end
     end
-    
+
 
     should "be signup (not in database but provides refferals name " do
       assert_difference "User.count" do
-        xhr :post, :signup, {:user => {:login => 'rashmiy',:password => 'test', :password_confirmation => 'test', 
-            :profile_attributes => {:email => 'ras123.yaadv@gmail.com',  
-              :first_name => 'rays', 
-              :last_name => 'jain', 
-              :group => '2006', 
+        xhr :post, :signup, {:user => {:login => 'rashmiy',:password => 'test', :password_confirmation => 'test',
+            :profile_attributes => {:email => 'ras123.yaadv@gmail.com',
+              :first_name => 'rays',
+              :last_name => 'jain',
+              :group => '2006',
               :gender => 'Female'}, :terms_of_service => '1',:first_referral_person_name => 'Rashmi Yadav',:first_referral_person_year => '2006',
-            :second_referral_person_name => 'John Jones', :second_referral_person_year => '2005', 
+            :second_referral_person_name => 'John Jones', :second_referral_person_year => '2005',
             :third_referral_person_name => 'De Veloper', :third_referral_person_year => '2006'
           }}
         assert assigns['user']
@@ -53,11 +53,11 @@ class AccountsControllerTest < ActionController::TestCase
 
     should "not be sign up(not in database and also not provides refferals name)" do
       assert_no_difference "User.count" do
-        post :signup, {:user => {:login => 'rashmiy',:password => 'test', :password_confirmation => 'test', 
-             :profile_attributes => {:email => 'ras.yaadv@gmail.com',  
-             :first_name => 'Rims', 
-             :last_name => 'Jain', 
-             :group => '2006', 
+        post :signup, {:user => {:login => 'rashmiy',:password => 'test', :password_confirmation => 'test',
+             :profile_attributes => {:email => 'ras.yaadv@gmail.com',
+             :first_name => 'Rims',
+             :last_name => 'Jain',
+             :group => '2006',
              :gender => 'Female'}, :terms_of_service => '1'}}
         #assert_nil assigns['user']
         assert_template 'signup'
@@ -67,10 +67,10 @@ class AccountsControllerTest < ActionController::TestCase
 
 
     should "signup if profile already exists but email not verified" do
-      post :signup, {:user => {:login => 'poojag',:password => 'test', 
+      post :signup, {:user => {:login => 'poojag',:password => 'test',
            :password_confirmation => 'test', :terms_of_service=>'1',
-           :profile_attributes => {:email => 'user3@example.com', 
-           :first_name => 'rashmi', :last_name => 'yadav', 
+           :profile_attributes => {:email => 'user3@example.com',
+           :first_name => 'rashmi', :last_name => 'yadav',
            :group => '2006', :gender => 'Female'} }}
       #assert_response :redirect
       assert assigns['user']
@@ -78,9 +78,9 @@ class AccountsControllerTest < ActionController::TestCase
       #do_assertion
       #assert_equal 'Thanks for signing up. Please check your email for a confirmation message from us.', flash[:notice]
     end
-    
 
-  
+
+
     should "signup if profile already exists but email not verified and in database" do
       xhr :post, :signup, {:user => {:login => 'anurag', :password => 'test',
           :password_confirmation => 'test', :terms_of_service => '1',
@@ -90,7 +90,7 @@ class AccountsControllerTest < ActionController::TestCase
       assert assigns['user']
       assert_template '_thanks'
     end
-    
+
     should "signup if profile already exists but email not verified and in database and taking another email" do
       xhr :post, :signup, {:user => {:login => 'anurag', :password => 'test',
           :password_confirmation => 'test', :terms_of_service => '1',
@@ -100,19 +100,19 @@ class AccountsControllerTest < ActionController::TestCase
       assert assigns['user']
       assert_template '_thanks'
     end
-  
+
     should "signup if profile already exists but email not verified and not in database and provides referral name" do
       xhr :post, :signup, {:user => {:login => 'anu', :password => 'test',
           :password_confirmation => 'test', :terms_of_service => '1',
           :profile_attributes => {:email => 'user4@example.com',
           :first_name => 'John', :last_name => 'Abraham',
           :group => '2005', :gender => 'Male'}, :terms_of_service => '1',:first_referral_person_name => 'Rashmi Yadav',:first_referral_person_year => '2006',
-          :second_referral_person_name => 'John Jones', :second_referral_person_year => '2005', 
+          :second_referral_person_name => 'John Jones', :second_referral_person_year => '2005',
           :third_referral_person_name => 'De Veloper', :third_referral_person_year => '2006' }}
       assert assigns['user']
       assert_template '_thanks'
     end
-    
+
     should "signup if profile already exists but email not verified and not in database and not providing referral  names" do
       xhr :post, :signup, {:user => {:login => 'anu', :password => 'test',
           :password_confirmation => 'test', :terms_of_service => '1',
@@ -131,19 +131,19 @@ class AccountsControllerTest < ActionController::TestCase
         assert_template 'signup'
         #do_sign_up_assertion          #tag checking
       end
-      
+
     end
-    
+
     should "not sign up if profile already exists and email verified" do
       assert_no_difference "User.count" do
-        post :signup, {:user => {:login => 'user123',:password => 'test', :password_confirmation => 'test', 
+        post :signup, {:user => {:login => 'user123',:password => 'test', :password_confirmation => 'test',
              :profile_attributes => {:email => 'user@example.com', :first_name => 'De', :last_name => 'Veloper', :group => '2006'}, :terms_of_service=>'1'}}
         assert_nil assigns(:u)
         assert_template 'signup'
         #do_sign_up_assertion
       end
     end
-    
+
     should "require login on signup" do
       assert_no_difference "User.count" do
         create_user(:login => nil)
@@ -151,7 +151,7 @@ class AccountsControllerTest < ActionController::TestCase
         assert_response :success
       end
     end
-    
+
     should" require password on signup" do
       assert_no_difference "User.count" do
         create_user(:password => nil)
@@ -159,7 +159,7 @@ class AccountsControllerTest < ActionController::TestCase
         assert_response :success
       end
     end
-    
+
     should "require email on signup" do
       assert_no_difference "User.count" do
         create_user(:profile_attributes => {:email => nil})
@@ -167,7 +167,7 @@ class AccountsControllerTest < ActionController::TestCase
         assert_response :success
       end
     end
-    
+
     should "not signup bcoz no terms" do
       flashback
       assert_no_difference "User.count" do
@@ -183,8 +183,8 @@ class AccountsControllerTest < ActionController::TestCase
       end
       assert_response :success
       assert_nil assigns(:u)
-      
-    end    
+
+    end
   end
 
   def test_should_login_and_redirect
@@ -199,27 +199,27 @@ class AccountsControllerTest < ActionController::TestCase
     assert_nil session[:user]
     assert_response :success
   end
-  
+
   def test_should_not_login_if_email_not_varified
     @request.session[:user] = profiles(:inactive)
     post :login, :user => {:login => users(:inactive).login, :password => 'test'}
     assert_equal 'Your email address has not yet been confirmed.', flash[:error]
     assert_response 302
   end
-  
+
   def test_should_not_login_with_blank_login
     post :login, :user=> {:login => '',:password => 'test'}
     assert_nil session[:user]
     assert_nil assigns['u']
   end
-  
+
   def test_should_not_login_with_blank_password
     post :login, :user=> {:login => 'user',:password => ''}
     assert_nil session[:user]
     assert_nil assigns['u']
   end
 
-  
+
   context " on:POST forgot password" do
     should " raise error if email not exists" do
       flashback
@@ -231,7 +231,7 @@ class AccountsControllerTest < ActionController::TestCase
       assert_template 'forgot_password'
       do_forgot_password_assertion              #tag checking
     end
-    
+
     should " get forgot password " do
       flashback
       assert u = users(:user)
@@ -243,7 +243,7 @@ class AccountsControllerTest < ActionController::TestCase
       assert_template 'login'
       do_login_assertion                         #tag checking
     end
-    
+
     should "not send mail for password no email provided" do
       post :login, :profile => {:email => ''}, :new_password => 'New Password'
       assert_nil assigns['u']
@@ -251,7 +251,7 @@ class AccountsControllerTest < ActionController::TestCase
       do_forgot_password_assertion               #tag checking
     end
   end
-  
+
   def test_should_logout
     login_as :user
     get :logout
@@ -296,56 +296,56 @@ class AccountsControllerTest < ActionController::TestCase
     get :login
     assert !@controller.send(:logged_in?)
   end
-  
+
   def test_of_confirmed_user
     u = users(:user)
-    get :confirmation_email, :user_id => u, :hash => u.email_verification 
+    get :confirmation_email, :user_id => u, :hash => u.email_verification
     assert_redirected_to login_path
   end
-  
+
   def test_should_confirm_email
     u = users(:user2)
-    get :confirmation_email, :user_id => u, :hash => u.email_verification 
+    get :confirmation_email, :user_id => u, :hash => u.email_verification
     assert_redirected_to login_path
   end
-  
+
   def test_should_not_confirm_email
     u = users(:user2)
     get :confirmation_email, :user_id => u, :hash => '43442424234ff'
     assert_equal "We're sorry but it seems that the confirmation did not go thru. You may have provided an expired key.", flash[:notice]
     assert_redirected_to login_path
   end
-  
+
   context " should check email availability" do
-    
+
     should "email exists" do
       get :check_email, :email => 'user@example.com'
       assert_response :success
     end
-    
+
     should "email does not exists" do
       get :check_email, :email => 'lquire@example.com'
       assert_response :success
     end
   end
-  
+
   context " should check login availability" do
-    
+
     should "login exists" do
       get :check_login, :login => 'user'
       assert_response :success
     end
-    
+
     should "login does not exists" do
       get :check_login, :login => 'lquire'
       assert_response :success
     end
-    
+
   end
-  
+
   protected
   def create_user(options = {}, signup_code = '1234')
-    post :signup, {:user => { :login => 'lquire', :password => 'lquire', :password_confirmation => 'lquire', :terms_of_service => '1',  
+    post :signup, {:user => { :login => 'lquire', :password => 'lquire', :password_confirmation => 'lquire', :terms_of_service => '1',
         :profile_attributes => {:email => 'lquire@example.com', :first_name => 'Rashmi', :last_name => 'Yadav', :group => '2003'} }.merge(options)}
   end
 
@@ -356,14 +356,14 @@ class AccountsControllerTest < ActionController::TestCase
   def cookie_for(user)
     auth_token users(user).remember_token
   end
-=begin  
+=begin
   def do_sign_up_assertion
     assert_tag :tag => 'form'
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[login]'}
     assert_tag :tag => 'input', :attributes => {:type => 'password', :name => 'user[password]'}
     assert_tag :tag => 'input', :attributes => {:type => 'password', :name => 'user[password_confirmation]'}
-   
-    
+
+
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[profile_attributes][email]'}
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[profile_attributes][first_name]'}
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[profile_attributes][middle_name]'}
@@ -378,16 +378,16 @@ class AccountsControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[second_referral_person_year]'}
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[third_referral_person_name]'}
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[third_referral_person_year]'}
-    
+
     assert_tag :tag => 'input', :attributes => {:type => 'checkbox', :name => 'user[terms_of_service]'}
     assert_tag :tag => 'a', :attributes => {:href => '/tos'}
     assert_tag :tag => 'input', :attributes => {:type => 'submit', :value => 'Sign Me Up'}
-  
-    
-    
+
+
+
   end
-=end 
-  
+=end
+
   def do_assertion
     assert_tag :tag => "div", :attributes => {:class => "widget_large"}
     #assert_tag :tag => 'img',:attributes => {:title => 'Help', :class => 'help'},  :parent => {:tag => 'h2', :attributes => {:class => 'widget_lrg_top'}, :content => "Thanks for signing up!"}
@@ -402,7 +402,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'profile[email]'}
     assert_tag :tag => 'button', :attributes => {:type => 'submit'}
   end
-  
+
   def do_login_assertion
     assert_tag :tag => 'form',:attributes => {:action => login_path}
     assert_tag :tag => 'input', :attributes => {:type => 'text', :name => 'user[login]'}
@@ -410,5 +410,5 @@ class AccountsControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {:type => 'checkbox', :name => 'user[remember_me]'}
     assert_tag :tag => 'img', :attributes => {:alt => 'Login'}
   end
-  
+
 end

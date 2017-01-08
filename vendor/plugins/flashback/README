@@ -6,7 +6,7 @@ access the discarded flash variables (those that were _flashed_) during
 the request processing. Specifically, it will allow you to access the
 <em>Flash.now</em> variables by name.
 
-You will access these discarded variables similar to how you would access them 
+You will access these discarded variables similar to how you would access them
 in <em>Flash.now</em>, but this time via a _flashed_ method. For example:
 
   class FooController < ApplicationController
@@ -25,12 +25,12 @@ in <em>Flash.now</em>, but this time via a _flashed_ method. For example:
     end
   end
 
-What you will not have access to via _flashed_ are the normal, 
+What you will not have access to via _flashed_ are the normal,
 inter-request Flash variables. This is because Flashback is only tracking
 those flash variables that are _discarded_ during the transaction, which
 includes all variables passed through <em>Flash.now</em>.
 
-If you want _flashed_ available all of the time, then simply call _flashback_ 
+If you want _flashed_ available all of the time, then simply call _flashback_
 in the _setup_ method of your TestCase. There are likely better ways that I hope
 someone will tell me about, but I just wanted to get this plugin out-the-door.
 

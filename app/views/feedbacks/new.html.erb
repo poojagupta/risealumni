@@ -4,19 +4,19 @@
     <% form_for :feedback, :url => feedbacks_path, :method => :post do |f| 	%>
       <% f.label_class = 'label_margin' %>
       <% unless @p %>
-        <%= f.labelled_text_field('Name', :name, 
+        <%= f.labelled_text_field('Name', :name,
                                   :title => "Name", :wrap_class => cycle(:row_light, :row_dark)) %>
-        <%= f.labelled_text_field('Email', :email, 
-                                :title => "Email", :wrap_class => cycle(:row_light, :row_dark)) %>        
+        <%= f.labelled_text_field('Email', :email,
+                                :title => "Email", :wrap_class => cycle(:row_light, :row_dark)) %>
       <% end %>
-      <%= f.labelled_text_field('Subject', :subject, 
+      <%= f.labelled_text_field('Subject', :subject,
                                 :title => "Subject", :wrap_class => cycle(:row_light, :row_dark)) %>
-      <%= f.labelled_text_area('Message', :message, 
+      <%= f.labelled_text_area('Message', :message,
                                :title => "Message", :wrap_class => "#{cycle(:row_light, :row_dark)}_large") %>
       <% unless @test || @p %>
         <div class="<%= cycle(:row_light, :row_dark) %>">
-          <%= captcha_field_with_options(:feedback, 
-                                         {:class => "text_field"}, 
+          <%= captcha_field_with_options(:feedback,
+                                         {:class => "text_field"},
                                          {:class => "label_margin"}) if @production %>
           <div class="error"><%= @feedback.errors[:captcha]%></div>
         </div>

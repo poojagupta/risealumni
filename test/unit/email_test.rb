@@ -16,7 +16,7 @@ class EmailTest < ActiveSupport::TestCase
     @expected.mime_version = '1.0'
   end
 
-    
+
     def test_associations
       _test_associations
     end
@@ -29,8 +29,8 @@ class EmailTest < ActiveSupport::TestCase
     def encode(subject)
       quoted_printable(subject, CHARSET)
     end
-    
-    
-    
-    
+
+
+
+
   end

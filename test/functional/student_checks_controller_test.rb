@@ -7,7 +7,7 @@ class StudentChecksControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     @request.session[:user] = users(:admin)
   end
-  
+
   def test_should_get_index
     @request.session[:user] = users(:admin)
     get :index,{:all => true}
@@ -62,7 +62,7 @@ class StudentChecksControllerTest < ActionController::TestCase
     put :update, :id => student_checks(:student1).id, :student_check => {:year => nil }
     assert_response :success
   end
-   
+
   def test_should_destroy_student_check
     assert_difference('StudentCheck.count', -1) do
       @request.session[:user] = users(:admin)
@@ -77,14 +77,14 @@ class StudentChecksControllerTest < ActionController::TestCase
     assert_equal 'Bulk Invites sent.', flash[:notice]
     assert_redirected_to '/admin'
   end
-  
+
   def test_should_send_invite
     @request.session[:user] = users(:admin)
     post :send_invite, :id => student_checks(:student1).id
     assert_equal 'Invite sent.', flash[:notice]
     assert_redirected_to '/admin'
   end
-  
+
   def test_should_view_year_students
     @request.session[:user] = users(:admin)
     get :view_year_students,:year =>'2001'

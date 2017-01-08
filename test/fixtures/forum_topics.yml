@@ -4,11 +4,11 @@
 # Table name: forum_topics
 #
 #  id         :integer(11)   not null, primary key
-#  title      :string(255)   
-#  forum_id   :integer(11)   
-#  owner_id   :integer(11)   
-#  created_at :datetime      
-#  updated_at :datetime      
+#  title      :string(255)
+#  forum_id   :integer(11)
+#  owner_id   :integer(11)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 ##

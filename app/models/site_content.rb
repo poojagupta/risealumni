@@ -2,7 +2,7 @@ class SiteContent < ActiveRecord::Base
   acts_as_tree :order => "name"
   validates_presence_of :name
   validates_uniqueness_of :name
-  
+
   def self.get_content(name,child = "")
     c = find_by_name(name)
     if c && child != ""
@@ -10,5 +10,5 @@ class SiteContent < ActiveRecord::Base
     end
     return c.blank? ? "" : c.content
   end
-  
+
 end

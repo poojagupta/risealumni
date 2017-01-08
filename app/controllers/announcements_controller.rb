@@ -42,7 +42,7 @@ class AnnouncementsController < ApplicationController
       else
         format.html do
           flash[:notice] = 'Announcement was not Successfully created'
-          render :action => "new" 
+          render :action => "new"
         end
         format.xml  { render :xml => @announcement.errors, :status => :unprocessable_entity }
       end
@@ -62,7 +62,7 @@ class AnnouncementsController < ApplicationController
       else
         format.html do
           flash[:notice] = 'Announcement was not successfully updated'
-          render :action => "edit" 
+          render :action => "edit"
         end
         format.xml  { render :xml => @announcement.errors, :status => :unprocessable_entity }
       end
@@ -78,12 +78,12 @@ class AnnouncementsController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:notice] = 'Announcement has been successfully delected'
-        redirect_to announcements_path 
+        redirect_to announcements_path
       end
       format.xml  { head :ok }
     end
   end
-  
+
   private
 
   def allow_to

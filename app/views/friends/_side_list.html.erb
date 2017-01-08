@@ -1,5 +1,5 @@
-<% cache cache_name(type,@profile) do%>  
-  <% 
+<% cache cache_name(type,@profile) do%>
+  <%
   profile ||= @profile
   type ||= 'friends'
   size ||= 6
@@ -18,7 +18,7 @@
   %>
 
   <%- unless list.empty? -%>
-    <% rounded_corner(:size => :small, 
+    <% rounded_corner(:size => :small,
                       :title => title.titleize + " " + see_all) do  %>
       <div>
         <% list.each do |p| %>

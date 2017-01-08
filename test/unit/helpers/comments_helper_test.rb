@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class CommentsHelperTest < ActionView::TestCase
 
   include CommentsHelper
-  
+
   def test_check_comments
     @p = profiles(:user)
     c = check_comment(comments(:second))
@@ -15,5 +15,5 @@ class CommentsHelperTest < ActionView::TestCase
    c = check_comment(comments(:third))
    assert_not_nil c
  end
-   
+
 end

@@ -3,19 +3,19 @@ class PollTest < ActiveSupport::TestCase
   should_have_many :poll_options,:poll_responses
   should_require_attributes :question, :profile
   should_belong_to :profile
-  
+
   def test_responded
     poll = polls(:poll_1)
     p = profiles(:user)
     assert poll.responded?(p)
   end
-  
+
   def test_not_responded
     poll = polls(:poll_1)
     p = profiles(:user4)
     assert !poll.responded?(p)
   end
- 
+
   def test_can_not_edit
     poll = polls(:poll_1)
     assert !poll.can_edit?
@@ -33,5 +33,5 @@ class PollTest < ActiveSupport::TestCase
     poll = polls(:poll_2)
     assert_not_nil poll.options_in_proper_order
   end
-    
+
 end

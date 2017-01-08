@@ -9,7 +9,7 @@ unless defined?(RAILS_ROOT)
   RAILS_ROOT = root_path
 end
 
-unless defined?(RAILS_FRAMEWORK_ROOT) 
+unless defined?(RAILS_FRAMEWORK_ROOT)
   RAILS_FRAMEWORK_ROOT = ENV['RAILS_FRAMEWORK_ROOT'] || "#{RAILS_ROOT}/vendor/rails"
 end
 

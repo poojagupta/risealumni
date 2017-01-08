@@ -1,7 +1,7 @@
 <h2 class="page_title"> <%= SITE_NAME %>  Forums
-  <%= link_to image_tag('add_new_post.png', 
-                                :title=>"Create New Forum", 
-                                :class=>"add_new_post2"), 
+  <%= link_to image_tag('add_new_post.png',
+                                :title=>"Create New Forum",
+                                :class=>"add_new_post2"),
                       new_forum_path if @u.is_admin? %>
 </h2>
 <% if @forums.empty? %>
@@ -12,12 +12,12 @@
 <% else %>
   <div class="widget_complete">
     <span class="widget_complete_top"></span>
-    <h3 class="forum_head"> Forum 
+    <h3 class="forum_head"> Forum
       <span class="posts">Posts</span>
       <span class="last_post">Last Post</span>
     </h3>
     <%= render :partial => 'forum', :collection => @forums%>
-    <div class="clear_div"></div> 
+    <div class="clear_div"></div>
     <span class="widget_complete_btm"></span>
   </div>
 

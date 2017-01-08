@@ -1,7 +1,7 @@
 class ForumPostsController < ApplicationController
   before_filter :setup
   layout "plain"
-   
+
   def create
     @post = @topic.posts.build(params[:forum_post])
     @post.owner = @p
@@ -41,10 +41,10 @@ class ForumPostsController < ApplicationController
     @forum = Forum.find(params[:forum_id])
     @topic = @forum.topics.find(params[:topic_id])
   end
-  
+
   def allow_to
     super :admin, :all => true
     super :active_user, :only => [:new, :create,:index, :show,:destroy]
   end
-  
+
 end

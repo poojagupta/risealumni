@@ -112,7 +112,7 @@ class MysqlSession
       # if @id is not nil, this is a session already stored in the database
       # update the relevant field using @id as key
       connection.query("UPDATE sessions SET `updated_at`=NOW(), `data`='#{Mysql::quote(data)}' WHERE id=#{@id}")
-    else 
+    else
       # if @id is nil, we need to create a new session in the database
       # and set @id to the primary key of the inserted record
       connection.query("INSERT INTO sessions (`created_at`, `updated_at`, `sessid`, `data`) VALUES (NOW(), NOW(), '#{@sessid}', '#{Mysql::quote(data)}')")

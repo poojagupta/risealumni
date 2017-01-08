@@ -1,13 +1,13 @@
 class FriendSweeper < ActionController::Caching::Sweeper
-  observe Friend  
-  
+  observe Friend
+
   def after_create(friend)
     expire_cache(friend)
   end
   def after_destroy(friend)
     expire_cache(friend)
   end
-  
+
   def expire_cache(friend)
     expire_fragment "profile_#{friend.inviter_id}/friends"
     expire_fragment "profile_#{friend.invited_id}/friends"
@@ -17,4 +17,4 @@ class FriendSweeper < ActionController::Caching::Sweeper
     expire_fragment "profile_#{friend.invited_id}/followers"
   end
 end
-  
+

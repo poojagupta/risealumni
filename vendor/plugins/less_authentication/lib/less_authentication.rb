@@ -7,19 +7,19 @@ class ActionController::Base
     return @u unless @u.nil?
     self.user = User.find_by_id(session[:user])
   end
-  
+
   # Accesses the current user from the session.
   def user
     @u if logged_in?
   end
-  
+
   # Store the given user in the session.
   def user=(u)
     return if u.nil? or !u.respond_to?(:new_record?)
     session[:user] = u.id unless u.new_record?
     @u = u
   end
-  
+
   # Check if the user is authorized.
   #
   # Override this method in your controllers if you want to restrict access
@@ -35,8 +35,8 @@ class ActionController::Base
   def authorized?
     true
   end
-  
-  
+
+
   def check_user
     @u = session[:user] ? user : nil
   end
@@ -61,7 +61,7 @@ class ActionController::Base
     self.user ||= User.authenticate(username, passwd) || :false if username && passwd
     logged_in? && authorized? ? true : access_denied
   end
-  
+
   # Redirect as appropriate when an access request fails.
   #
   # The default action is to redirect to the login screen.
@@ -73,8 +73,8 @@ class ActionController::Base
   def access_denied
     store_location
     redirect_to login_url
-  end  
-  
+  end
+
   # Store the URI of the current request in the session.
   #
   # We can return to this location by calling #redirect_back_or_default.
@@ -85,9 +85,9 @@ class ActionController::Base
 
 
 
-    
-    
-    
+
+
+
   # Redirect to the URI stored by the most recent store_location call or
   # to the passed default.
   def redirect_back url
@@ -95,12 +95,12 @@ class ActionController::Base
   end
   def redirect_back_or_default(default)
     return if performed?
-    if session[:return_to] && 
-      session[:return_to] != home_url && 
+    if session[:return_to] &&
+      session[:return_to] != home_url &&
       session[:return_to] != "#{request.request_uri}" &&
       !session[:return_to].include?( request.path)
-      redirect_to(session[:return_to]) 
-    else 
+      redirect_to(session[:return_to])
+    else
       redirect_to(default)
     end
     session[:return_to] = nil
@@ -142,20 +142,20 @@ private
   # gets BASIC auth info
   def get_auth_data
     user, pass = nil, nil
-    # extract authorisation credentials 
-    if request.env.has_key? 'X-HTTP_AUTHORIZATION' 
-      # try to get it where mod_rewrite might have put it 
-      authdata = request.env['X-HTTP_AUTHORIZATION'].to_s.split 
-    elsif request.env.has_key? 'HTTP_AUTHORIZATION' 
-      # this is the regular location 
-      authdata = request.env['HTTP_AUTHORIZATION'].to_s.split  
-    end 
-     
-    # at the moment we only support basic authentication 
-    if authdata && authdata[0] == 'Basic' 
-      user, pass = Base64.decode64(authdata[1]).split(':')[0..1] 
-    end 
-    return [user, pass] 
+    # extract authorisation credentials
+    if request.env.has_key? 'X-HTTP_AUTHORIZATION'
+      # try to get it where mod_rewrite might have put it
+      authdata = request.env['X-HTTP_AUTHORIZATION'].to_s.split
+    elsif request.env.has_key? 'HTTP_AUTHORIZATION'
+      # this is the regular location
+      authdata = request.env['HTTP_AUTHORIZATION'].to_s.split
+    end
+
+    # at the moment we only support basic authentication
+    if authdata && authdata[0] == 'Basic'
+      user, pass = Base64.decode64(authdata[1]).split(':')[0..1]
+    end
+    return [user, pass]
   end
 end
 

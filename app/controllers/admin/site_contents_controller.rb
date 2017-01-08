@@ -1,8 +1,8 @@
 class Admin::SiteContentsController < ApplicationController
   cache_sweeper :site_content_sweeper, :only => [:update]
   layout "admin"
-  
-  
+
+
   # GET /site_contents
   # GET /site_contents.xml
   def index
@@ -86,7 +86,7 @@ class Admin::SiteContentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-    
+
   private
   def allow_to
     super :admin, :all => true

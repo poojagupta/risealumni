@@ -1,7 +1,7 @@
 <h1>Editing site_content</h1>
 <% form_for(@site_content,:url =>admin_site_content_path(@site_content),:html => {:method => :put, :class=>" "}) do |f| %>
   <%= f.error_messages %>
-    <%= render :partial => "form", :locals => {:f => f} %>  
+    <%= render :partial => "form", :locals => {:f => f} %>
   <p>
     <%= f.submit "Update" %>
   </p>

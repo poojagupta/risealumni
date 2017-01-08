@@ -25,14 +25,14 @@ class PostsControllerTest < Test::Unit::TestCase
       resource.denied.actions = [:index, :show, :edit, :new, :create, :update, :destroy]
       resource.denied.flash = /what/i
       resource.denied.redirect = '"/"'
-    end    
+    end
   end
 
   context "Logged in" do
     setup do
       @request.session[:logged_in] = true
     end
-    
+
     should_be_restful do |resource|
       resource.parent = :user
 

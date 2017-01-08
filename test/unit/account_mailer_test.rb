@@ -38,7 +38,7 @@ class AccountMailerTest < ActiveSupport::TestCase
     assert_match @u.login, sent.body
     assert_match 'new_pass', sent.body
   end
-  
+
   def test_new_email_request
     ActionMailer::Base.default_url_options[:host] = 'localhost:9000'
     sent = AccountMailer.deliver_new_email_request(@u)
@@ -46,9 +46,9 @@ class AccountMailerTest < ActiveSupport::TestCase
     #assert_equal profiles(:user), sent.body['profile']
     assert_equal 'eded0c94d92e49882b60bd5c4e6d9d9b19ec2597', @u.email_verification
     assert_match "New email requested", sent.subject
-   
+
   end
-  
+
   def test_email_confirmed_by_user
     u = users(:user)
     activation  = u.profile.is_active ? 'Activated':'Requires Activation'
@@ -57,7 +57,7 @@ class AccountMailerTest < ActiveSupport::TestCase
     assert_equal Profile.admin_emails, response.to
     #assert_equal MAILER_FROM_ADDRESS, response.from
   end
-  
+
   def test_should_send_bday_greeting
     p = profiles(:user)
     response = AccountMailer.deliver_bday_greeting(p)
@@ -65,7 +65,7 @@ class AccountMailerTest < ActiveSupport::TestCase
     assert_equal [p.email], response.to
     #assert_equal ["info@risingsuntech.net"], response.from
   end
-  
+
   def test_should_anniversary_greeting
     p = profiles(:user)
     response = AccountMailer.deliver_anniversary_greeting(p)
@@ -73,14 +73,14 @@ class AccountMailerTest < ActiveSupport::TestCase
     assert_equal [p.email], response.to
     #assert_equal ["info@risingsuntech.net"], response.from
   end
-  
+
   def test_should_daily_signup_report
     response = AccountMailer.deliver_daily_signup_report
     assert_equal "[#{SITE_NAME} Daily Report] User Activations", response.subject
     assert_equal Profile.admin_emails, response.to
   end
-  
-  
+
+
   private
   def read_fixture(action)
     IO.readlines("#{FIXTURES_PATH}/account_mailer/#{action}")

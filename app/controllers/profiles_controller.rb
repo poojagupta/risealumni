@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   cache_sweeper :profile_flickr_video_sweeper, :only => [:update]
   #caches_page :edit_account
   #cache_sweeper :edit_account_sweeper, :only => [:update]
-  def show    
+  def show
     when_fragment_expired "profile_#{@profile.id}/profile_flickr_pics_and_video#{@profile.id}",
       :expire => EXPIRE_TIME_IN_MIN.minutes.from_now do
       unless @profile.youtube_username.blank?
@@ -30,30 +30,30 @@ class ProfilesController < ApplicationController
     @comments = @profile.comments.paginate(:page => params[:page], :per_page => @per_page)
     @feed_items = @profile.find_feed_items
     respond_to do |wants|
-      wants.html 
+      wants.html
       wants.rss {render :layout => false}
     end
   end
-  
+
   def search
     @title = "Search"
     render :template =>"shared/user_friends"
   end
-  
+
   def index
     @title = "Profiles"
     render :template =>"shared/user_friends"
   end
-  
+
   def edit
     render :layout => "plain"
   end
-  
+
   def update
     case params[:switch]
     when 'profile', 'name'
       unless params[:profile].blank?
-        params[:profile][:education_attributes] ||= {} # Attribute Fu 
+        params[:profile][:education_attributes] ||= {} # Attribute Fu
         params[:profile][:work_information_attributes] ||= {} # Attribute Fu
       end
       if @profile.update_attributes params[:profile] and @user.update_attributes(params[:user])
@@ -75,18 +75,18 @@ class ProfilesController < ApplicationController
       redirect_to edit_account_profile_url(@profile)
     when 'set_default_permissions'
       @profile.update_attributes params[:profile]
-      @profile.permissions.each {|p| p.destroy}  # Delete the old 
+      @profile.permissions.each {|p| p.destroy}  # Delete the old
       flash[:notice] = "Settings have been saved."
       redirect_to edit_account_profile_url(@profile)
     when 'request_email'
-      if @user.request_email_change!(params[:user][:requested_new_email]) 
+      if @user.request_email_change!(params[:user][:requested_new_email])
         AccountMailer.deliver_new_email_request(@user)
         flash[:notice] = "Email confirmation request has been sent to the new email address."
         redirect_to edit_account_profile_url(@profile)
       else
         render :action=> :edit_account, :layout => "plain"
       end
-      
+
     else
       @test ? render( :text=>'') : raise( 'Unsupported swtich in action')
     end
@@ -95,14 +95,14 @@ class ProfilesController < ApplicationController
   # Update the status message for user
   def status_update
     @profile.update_attribute("status_message", params[:value])
-    render :text => @profile.send("status_message") 
+    render :text => @profile.send("status_message")
   end
-  
+
   def delete_icon
     respond_to do |wants|
       @p.update_attribute :icon, nil
       wants.js {render :update do |page| page.visual_effect 'Fade', 'profile_icon_picture' end  }
-    end      
+    end
   end
 
   def destroy
@@ -111,14 +111,14 @@ class ProfilesController < ApplicationController
       cookies[:auth_token] = {:expires => Time.now-1.day, :value => ""}
       session[:user] = nil
       wants.js do
-        render :update do |page| 
+        render :update do |page|
           page.alert('Your user account, and all data, have been deleted.')
           page << 'location.href = "/";'
         end
       end
     end
   end
-   
+
   def update_email
     @profile = Profile.find(params[:profile_id])
     unless @profile.user.match_confirmation?(params[:hash])
@@ -133,33 +133,33 @@ class ProfilesController < ApplicationController
     end
     redirect_to home_path
   end
-  
+
   def edit_account
     @notification_control = @p.notification_control
     render :layout => "plain"
   end
-  
+
   def batch_mates
     @results = @profile.batch_mates(:page => params[:page], :per_page => @per_page)
     @title = "Group Members"
     render :template => "shared/user_friends"
   end
-  
+
   def network
   end
-  
+
   def followers
     @results = @profile.followers.paginate(:page => params[:page], :per_page => @per_page) # TODO Paginate
     @title = "Followers"
     render :template => "shared/user_friends"
   end
-  
+
   def followings
     @results = @profile.followings.paginate(:page => params[:page], :per_page => @per_page) # TODO Paginate
     @title = "Followings"
     render :template => "shared/user_friends"
   end
-  
+
   def batch_details
     @group = params[:group]
     if valid_batch_range
@@ -170,30 +170,30 @@ class ProfilesController < ApplicationController
       redirect_back_or_default('/')
     end
   end
-  
+
   def notification_control
     @profile.notification_control.update_attributes(params[:notification_control])
     flash[:notice] = "Notification Updated"
     redirect_to edit_account_profile_url(@profile)
   end
-  
+
   private
-  
+
   def allow_to
     super :owner, :all => true
-    super :active_user, :only => [:show, :index, 
+    super :active_user, :only => [:show, :index,
       :search,:batch_mates,
       :network,:followers,:followings,
       :batch_details] # only activated user can perform these action
-    
+
     super :all, :only => [:update_email]
   end
-  
+
   def setup_user_profile
     @profile = params[:id] == @p ? @p : Profile[params[:id]]
     @user = params[:id] == @p ? @u : @profile.user
   end
-  
+
   def show_panels
     @show_profile_side_panel = true
   end
@@ -201,5 +201,5 @@ class ProfilesController < ApplicationController
   def valid_batch_range(group = @group)
     !group.blank? && GROUPS.include?([group])
   end
-  
+
 end

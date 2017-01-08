@@ -1,6 +1,6 @@
 <% rounded_corner(:title => 'Birthdays') do %>
 
-  <% birthdays = Profile.birthdays %> 
+  <% birthdays = Profile.birthdays %>
   <% birthdays.keys.sort.each do |month| %>
     <b><%= Date::MONTHNAMES[month] %></b>
     <ul id="student_check_list">
@@ -13,7 +13,7 @@
 <% end %>
 
 <% rounded_corner(:title => 'Anniversaries') do %>
-  <% anniversaries = Profile.anniversaries %> 
+  <% anniversaries = Profile.anniversaries %>
   <% anniversaries.keys.sort.each do |month| %>
     <b><%= Date::MONTHNAMES[month] %></b>
     <ul id="student_check_list">

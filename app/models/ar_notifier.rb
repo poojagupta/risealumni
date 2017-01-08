@@ -1,5 +1,5 @@
 class ArNotifier < ActionMailer::ARMailer
-  
+
   helper :profiles, :application
   def sent_news(blog,user)
     @subject      = "[#{SITE_NAME} News] #{blog.title} by #{blog.sent_by}"
@@ -10,7 +10,7 @@ class ArNotifier < ActionMailer::ARMailer
     @sent_on      = Time.new
     content_type("text/html")
   end
-  
+
   def send_event_mail(profile,event)
     @subject         = "[#{SITE_NAME} Events] Latest event"
     @recipients      = profile.email
@@ -20,7 +20,7 @@ class ArNotifier < ActionMailer::ARMailer
     @sent_on         = Time.new
     content_type("text/html")
   end
-  
+
   def message_send(message,p)
     @subject         = "[#{SITE_NAME} Message] #{p.full_name} sent you a message : #{message.subject}"
     @recipients      = message.receiver.email
@@ -30,7 +30,7 @@ class ArNotifier < ActionMailer::ARMailer
     @sent_on         = Time.new
     content_type("text/html")
   end
-  
+
   def comment_send_on_blog(comment,profile,p)
     @subject         = "[#{SITE_NAME} Blog] #{p.full_name} wrote on your blog"
     @recipients      = profile.email
@@ -39,7 +39,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def comment_send_on_blog_to_others(comment,profile,p,blog_profile)
     @subject         = "[#{SITE_NAME} Blog] #{comment.profile.full_name} wrote on #{blog_profile.full_name} blog"
     @recipients      = profile.email
@@ -48,7 +48,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def comment_send_on_profile(comment,profile,p)
     @subject         = "[#{SITE_NAME} Wall] #{p.full_name} wrote on your wall"
     @recipients      = profile.email
@@ -57,7 +57,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def feedback_mail(feedback,rec_profile)
     @subject          = "[#{SITE_NAME} Feedback] #{feedback.subject}"
     @recipients       = ADMIN_RECIPIENTS
@@ -78,7 +78,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from                = MAILER_FROM_ADDRESS
     @sent_on             = Time.new
   end
-  
+
   def delete_friend user, friend
     @subject        = "[#{SITE_NAME} Notice] Delete friend notice"
     @recipients     = friend.email
@@ -87,7 +87,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from           = MAILER_FROM_ADDRESS
     @sent_on        = Time.new
   end
-  
+
   def user_status(profile)
     @subject         = "[#{SITE_NAME} Notice] New status change"
     @recipients      = profile.email
@@ -95,7 +95,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def invite(student)
     @subject         = "Hi #{student.full_name}, Get back to the future with #{SITE_NAME} on http://#{SITE}"
     @recipients      = student.emails
@@ -103,7 +103,7 @@ class ArNotifier < ActionMailer::ARMailer
     @from            = MAILER_FROM_ADDRESS
     @sent_on         = Time.new
   end
-  
+
   def invite_batchmates(invitation)
     @subject       = "[#{SITE_NAME} Invitation] Your batch mates are looking for you!"
     @recipients    = invitation.email

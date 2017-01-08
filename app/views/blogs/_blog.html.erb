@@ -49,9 +49,9 @@ show_all_comments ||= false
       Tags:
       <% blog.tags.each do |blog_tag| %>
         <% if @q.nil? %>
-          <%= link_to blog_tag.name, blogs_by_tag_path(blog_tag), :method => :get %> 
-        <%else%>  
-          <%= link_to highlight(blog_tag.name,@q,"<span class = 'tag_class'>#{params[:search][:blog]}</span>"), blogs_by_tag_path(blog_tag), :method => :get %>     
+          <%= link_to blog_tag.name, blogs_by_tag_path(blog_tag), :method => :get %>
+        <%else%>
+          <%= link_to highlight(blog_tag.name,@q,"<span class = 'tag_class'>#{params[:search][:blog]}</span>"), blogs_by_tag_path(blog_tag), :method => :get %>
         <% end %>
       <% end %>
     <% end %>

@@ -46,7 +46,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
   should "create a new forum topic for :user" do
     assert_nothing_raised do
       assert_difference "ForumTopic.count" do
-        post :create, {:forum_id => forums(:one).id, 
+        post :create, {:forum_id => forums(:one).id,
           :forum_topic => valid_forum_topic_attributes}, {:user => profiles(:user).id}
         assert_redirected_to forum_path(assigns(:topic).forum)
       end
@@ -88,7 +88,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
 
   should "not update a forum topic for :user" do
     assert_nothing_raised do
-      put :update, {:forum_id => forum_topics(:one).forum.id, 
+      put :update, {:forum_id => forum_topics(:one).forum.id,
         :id => forum_topics(:one).id,
         :forum => valid_forum_attributes}, {:user => profiles(:user).id}
       assert_response 302
@@ -111,7 +111,7 @@ class ForumTopicsControllerTest < ActionController::TestCase
   should "not destroy a forum topic for :user" do
     assert_nothing_raised do
       assert_no_difference "ForumTopic.count" do
-        delete :destroy, {:forum_id => forum_topics(:one).forum.id, 
+        delete :destroy, {:forum_id => forum_topics(:one).forum.id,
           :id => forum_topics(:one).id}, {:user => profiles(:user).id}
         assert_response 302
         assert flash[:error]
@@ -122,23 +122,23 @@ class ForumTopicsControllerTest < ActionController::TestCase
   should "destroy a forum topic for :admin" do
     assert_nothing_raised do
       assert_difference "ForumTopic.count", -1 do
-        delete :destroy, {:forum_id => forum_topics(:one).forum.id, 
+        delete :destroy, {:forum_id => forum_topics(:one).forum.id,
           :id => forum_topics(:one).id}, {:user => profiles(:admin).id}
         assert_redirected_to :controller => 'forums', :action => 'show', :id => forum_topics(:one).forum.to_param
       end
     end
   end
-  
+
   ##
   # :index (old tests)
-    
+
   should "get the index as :user" do
     assert_nothing_raised do
       get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:user).id}
       assert_response 302
     end
   end
-  
+
   should "get the index as :admin" do
     assert_nothing_raised do
       get :index, {:forum_id => forum_topics(:one).forum.id}, {:user => profiles(:admin).id}

@@ -1,5 +1,5 @@
-module ThoughtBot # :nodoc: 
-  module Shoulda # :nodoc: 
+module ThoughtBot # :nodoc:
+  module Shoulda # :nodoc:
     module Controller # :nodoc:
       module HTML # :nodoc: all
         def self.included(other)
@@ -7,14 +7,14 @@ module ThoughtBot # :nodoc:
             extend ThoughtBot::Shoulda::Controller::HTML::ClassMethods
           end
         end
-  
-        module ClassMethods 
+
+        module ClassMethods
           def make_show_html_tests(res)
             context "on GET to :show" do
               setup do
                 record = get_existing_record(res)
                 parent_params = make_parent_params(res, record)
-                get :show, parent_params.merge({ res.identifier => record.to_param })          
+                get :show, parent_params.merge({ res.identifier => record.to_param })
               end
 
               if res.denied.actions.include?(:show)
@@ -22,7 +22,7 @@ module ThoughtBot # :nodoc:
                 should_redirect_to res.denied.redirect
                 should_set_the_flash_to res.denied.flash
               else
-                should_assign_to res.object          
+                should_assign_to res.object
                 should_respond_with :success
                 should_render_template :show
                 should_not_set_the_flash
@@ -35,15 +35,15 @@ module ThoughtBot # :nodoc:
               setup do
                 @record = get_existing_record(res)
                 parent_params = make_parent_params(res, @record)
-                get :edit, parent_params.merge({ res.identifier => @record.to_param })          
+                get :edit, parent_params.merge({ res.identifier => @record.to_param })
               end
-        
+
               if res.denied.actions.include?(:edit)
                 should_not_assign_to res.object
                 should_redirect_to res.denied.redirect
                 should_set_the_flash_to res.denied.flash
               else
-                should_assign_to res.object                    
+                should_assign_to res.object
                 should_respond_with :success
                 should_render_template :edit
                 should_not_set_the_flash
@@ -60,13 +60,13 @@ module ThoughtBot # :nodoc:
               setup do
                 record = get_existing_record(res) rescue nil
                 parent_params = make_parent_params(res, record)
-                get(:index, parent_params)          
+                get(:index, parent_params)
               end
 
               if res.denied.actions.include?(:index)
                 should_not_assign_to res.object.to_s.pluralize
                 should_redirect_to res.denied.redirect
-                should_set_the_flash_to res.denied.flash          
+                should_set_the_flash_to res.denied.flash
               else
                 should_respond_with :success
                 should_assign_to res.object.to_s.pluralize
@@ -81,7 +81,7 @@ module ThoughtBot # :nodoc:
               setup do
                 record = get_existing_record(res) rescue nil
                 parent_params = make_parent_params(res, record)
-                get(:new, parent_params)          
+                get(:new, parent_params)
               end
 
               if res.denied.actions.include?(:new)
@@ -105,11 +105,11 @@ module ThoughtBot # :nodoc:
                 parent_params = make_parent_params(res, @record)
                 delete :destroy, parent_params.merge({ res.identifier => @record.to_param })
               end
-        
+
               if res.denied.actions.include?(:destroy)
                 should_redirect_to res.denied.redirect
                 should_set_the_flash_to res.denied.flash
-          
+
                 should "not destroy record" do
                   assert_nothing_raised { assert @record.reload }
                 end
@@ -138,15 +138,15 @@ module ThoughtBot # :nodoc:
                 @count = res.klass.count
                 post :create, parent_params.merge(res.object => res.create.params)
               end
-        
+
               if res.denied.actions.include?(:create)
                 should_redirect_to res.denied.redirect
                 should_set_the_flash_to res.denied.flash
                 should_not_assign_to res.object
-          
+
                 should "not create new record" do
                   assert_equal @count, res.klass.count
-                end          
+                end
               else
                 should_assign_to res.object
                 should_set_the_flash_to res.create.flash
@@ -157,9 +157,9 @@ module ThoughtBot # :nodoc:
                 end
 
                 should "not have errors on @#{res.object}" do
-                  assert_equal [], pretty_error_messages(assigns(res.object)), "@#{res.object} has errors:"            
+                  assert_equal [], pretty_error_messages(assigns(res.object)), "@#{res.object} has errors:"
                 end
-              end      
+              end
             end
           end
 
@@ -183,7 +183,7 @@ module ThoughtBot # :nodoc:
                 else
                   should_redirect_to res.update.redirect
                 end
-                
+
                 should "not have errors on @#{res.object}" do
                   assert_equal [], pretty_error_messages(assigns(res.object)), "@#{res.object} has errors:"
                 end

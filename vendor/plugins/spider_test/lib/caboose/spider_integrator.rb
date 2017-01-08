@@ -7,9 +7,9 @@ module Caboose::SpiderIntegrator
     return unless @debug
     puts "visiting #{url}"
   end
-  
-  
-  
+
+
+
   def consume_page( html, url )
     body = HTML::Document.new html
     body.find_all(:tag=>'a').each do |tag|
@@ -20,7 +20,7 @@ module Caboose::SpiderIntegrator
       queue_form( form, url )
     end
   end
-  
+
   def spider( body, uri, debug = false )
     @debug = debug
     @links_to_visit, @forms_to_visit = [], []
@@ -49,7 +49,7 @@ module Caboose::SpiderIntegrator
         if @response.nil?
           puts 'nil'
 #          puts next_link.uri
-          next 
+          next
         end
         puts( 't') if next_link.uri == 'http://www.example.com/admin_themed_searches'
         if %w( 200 302 401 ).include?( @response.code )
@@ -102,14 +102,14 @@ module Caboose::SpiderIntegrator
       @links_to_visit << Link.new( dest, source )
     end
   end
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   def create_data(input)
     case input['name']
     when /amount/: rand(10000) - 5000
@@ -119,14 +119,14 @@ module Caboose::SpiderIntegrator
       rand(10000).to_s
     end
   end
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   def queue_form( form, source )
     form_method = form['method']
     form_action = form['action']
@@ -162,4 +162,4 @@ module Caboose::SpiderIntegrator
 
   Link = Struct.new( :uri, :source )
 
-end 
+end

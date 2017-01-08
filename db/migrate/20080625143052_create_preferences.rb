@@ -6,7 +6,7 @@ class CreatePreferences < ActiveRecord::Migration
       t.integer :preference_group_id
       t.timestamps
     end
-    
+
   end
 
   def self.down

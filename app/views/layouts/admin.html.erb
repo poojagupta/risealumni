@@ -16,7 +16,7 @@
                             "calendar-red", "calendar_date_select/red", 'jcrop','jcarousel','skin','galleriffic',:cache => true %>
     <%= yield :head %>
     <%= yield :gmap %>
-    
+
     <!--[if lt IE 7.]>
       <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
     <![endif]-->
@@ -26,9 +26,9 @@
     <div class="main_container">
       <%= render :partial => 'layouts/header' %>
       <div class="content_container">
-        <div class="login_container" id="info"> 
+        <div class="login_container" id="info">
           <% if @u.nil? or @u.new_record? or !@u.email_verified %>
-            <span class="welcome_msg">Welcome to <%= SITE_NAME_FULL %>.</span> 
+            <span class="welcome_msg">Welcome to <%= SITE_NAME_FULL %>.</span>
           <% else %>
             <%= render :partial => "shared/header_tab" %>
           <% end %>

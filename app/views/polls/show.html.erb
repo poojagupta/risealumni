@@ -5,7 +5,7 @@
 <div>
   <h2 class="page_title">
     <%= @profile.full_name %>'s poll
-    <%= link_to image_tag('add.png', :title=>"Add New Post", :class=>"add_new_post2"), 
+    <%= link_to image_tag('add.png', :title=>"Add New Post", :class=>"add_new_post2"),
                 new_profile_poll_path(@profile)  if @p == @profile %>
   </h2>
   <%= render :partial => 'polls/poll',:locals => {:poll => @poll} %>

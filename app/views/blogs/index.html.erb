@@ -7,20 +7,20 @@
 
 <div id="column_l">
   <h2 class="page_title"><%= @profile.full_name %>'s Blogs
-    <%= link_to image_tag('add_new_post.png', 
-                          :title=>"Create New Blog Post", 
-                          :class=>"add_new_post2"), 
+    <%= link_to image_tag('add_new_post.png',
+                          :title=>"Create New Blog Post",
+                          :class=>"add_new_post2"),
                 new_profile_blog_path(@profile) if me %>
   </h2>
   <% if @blogs.empty? %>
     <div class="widget_large">
-      
+
       <div class="comments"><%= @profile.full_name %> has no blog posts.</div>
       <span class="widget_lrg_btm"></span>
     </div>
   <% else %>
     <%= render :partial => 'blogs/blog', :collection => @blogs %>
-    <div class="clear_div"></div>     
+    <div class="clear_div"></div>
     <%= will_paginate @blogs%>
   <% end %>
 </div>

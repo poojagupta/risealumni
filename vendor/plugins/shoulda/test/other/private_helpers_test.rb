@@ -9,7 +9,7 @@ class PrivateHelpersTest < Test::Unit::TestCase # :nodoc:
       assert_equal [:a, :b], args
     end
 
-    should "return wanted opts in order" do      
+    should "return wanted opts in order" do
       args = [{:one => 1, :two => 2}]
       one, two = get_options!(args, :one, :two)
       assert_equal 1, one

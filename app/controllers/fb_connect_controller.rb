@@ -11,7 +11,7 @@ class FbConnectController < ApplicationController
       session[:facebook_session] = facebook_session
       logger.debug "facebook session in connect: #{facebook_session.inspect}"
       if facebook_user
-        if logged_in? 
+        if logged_in?
           if @u.update_attributes(:facebook_uid => facebook_user.uid)
             flash[:error] = 'Sucessfully logged in facebook.'
             redirect_to profile_path(@u.profile) and return

@@ -14,12 +14,12 @@ Object.extend(String.prototype, {
 });
 
 Object.extend(Date.prototype, {
-    
+
     addDays: function(days) {
         this.setMilliseconds((this.getMilliseconds() + 1000*60*60*24*days));
         return this;
     },
-    
+
     addMonths: function(months) {
         this.setMonth(this.getMonth() + months);
         return this;
@@ -30,15 +30,15 @@ Object.extend(Date.prototype, {
 //
 // Datebalks: "natural date" parsing
 //
-// You can localize this by changing the strings here and also by changing the 
-// order of precedence in the resetDictionary() function. The patterns will 
+// You can localize this by changing the strings here and also by changing the
+// order of precedence in the resetDictionary() function. The patterns will
 // likely need to be changed also as many are hard-coded for simplicity.
 //
-// Patterns work as follows: 
+// Patterns work as follows:
 //    - Return a date => match!
 //    - Return null   => no match
-// 
-// This makes pattern matching a bit more flexible that regexp based matching 
+//
+// This makes pattern matching a bit more flexible that regexp based matching
 // only though a bit more complex too.
 //
 // ==========================================================================
@@ -82,19 +82,19 @@ Object.extend(Datebalks.Context.prototype, {
             Datebalks.Suffixes
         );
     },
-    
+
     parse: function(string) {
         return this.parseExpandedString(
             this.expandString(string.toLowerCase())
         );
     },
-    
+
     expandString: function(string) {
 
         for (i=0; i<string.length; i++) {
-    
+
             char = string.charAt(i);
-            
+
             if (char.match(/\s/)) {
                 this.expandToken();
                 this.matching_number_or_date = false;
@@ -137,7 +137,7 @@ Object.extend(Datebalks.Context.prototype, {
 
         return this.tokens.join(' ');
     },
-    
+
     expandToken: function() {
         token = this.token.strip();
         if (token.length > 0) {
@@ -162,7 +162,7 @@ Object.extend(Datebalks.Context.prototype, {
             index = Datebalks.SpecificDays.indexOf(string);
             return (index != -1)? new Date().addDays(index - 1) : null;
         },
-        
+
         // last friday, next monday
         // next month, last week
         // in 2 days, in 3 weeks, in 1 month, in 3 mondays
@@ -176,18 +176,18 @@ Object.extend(Datebalks.Context.prototype, {
                 date = new Date();
 
                 switch(c[3]) {
-                    case 'days'  : 
+                    case 'days'  :
                         date.addDays(dir * mag);        break;
-                    case 'weeks' : 
+                    case 'weeks' :
                         date.addDays(dir * mag * 7);    break;
-                    case 'months': 
+                    case 'months':
                         date.addMonths(dir * mag);      break;
-                    case 'sundays': 
-                    case 'mondays': 
-                    case 'tuesdays': 
-                    case 'wednesdays': 
-                    case 'thursdays': 
-                    case 'fridays': 
+                    case 'sundays':
+                    case 'mondays':
+                    case 'tuesdays':
+                    case 'wednesdays':
+                    case 'thursdays':
+                    case 'fridays':
                     case 'saturdays':
                         day = date.getDay();
                         wd  = Datebalks.Weekdays.indexOf(c[3]);
@@ -203,7 +203,7 @@ Object.extend(Datebalks.Context.prototype, {
             }
             return null;
         },
-        
+
         // dd.mm, dd-mm, dd/mm
         function (string) {
             if (c = string.match(/^(\d{1,2}).(\d{1,2})$/))
@@ -270,26 +270,26 @@ Object.extend(Datebalks.Context.prototype, {
     parseExpandedString: function(string) {
         var context = this;
         var value   = null;
-        this.Patterns.detect( function(f) { 
-            return (value = f.apply(context, [string])); 
+        this.Patterns.detect( function(f) {
+            return (value = f.apply(context, [string]));
         });
         return value;
     },
-    
+
     generateDate: function(year, month, day) {
 
         today = new Date();
-        
+
         // Remove leading zeros from string arguments
         year  = (typeof year  == 'string')? year.replace(/^0+/,'')  : year;
         month = (typeof month == 'string')? month.replace(/^0+/,'') : month;
         day   = (typeof day   == 'string')? day.replace(/^0+/,'')   : day;
-        
+
         // Set defaults for unspecified components
         day   = day   ? parseInt(day)     : 1;
         month = month ? parseInt(month)-1 : today.getMonth();
         year  = year  ? parseInt(year)    : today.getFullYear() + (month < today.getMonth() ? 1 : 0);
-        
+
         // Fix year that have fewer than four digits
         year  = (year < today.getFullYear() % 2000 + 30)? year + 2000 : year;
 
@@ -306,7 +306,7 @@ Object.extend(Datebalks.Context.prototype, {
 Object.extend(Datebalks, {
 
     appendPopupAndText: function(element) {
-        
+
         element  = $(element);
         old_name = element.name;
         old_value = element.value;
@@ -327,16 +327,16 @@ Object.extend(Datebalks, {
               button         :    img_id,
               align          :    "Tl",
               singleClick    :    true,
-              onUpdate       :    function() { 
+              onUpdate       :    function() {
                 xsml_id = element.id + '_date_output';
                 xinp_id = element.id + '_date_parsed';
-                $(xsml_id).update('&nbsp;'); 
-                $(xinp_id).value = element.value 
+                $(xsml_id).update('&nbsp;');
+                $(xinp_id).value = element.value
               }
         });
 
         new Form.Element.DelayedObserver(element, 0.75, function() {
-          
+
             xsml_id = element.id + '_date_output';
             xinp_id = element.id + '_date_parsed';
             if (element.value.strip() != '') {

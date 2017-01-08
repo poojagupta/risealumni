@@ -1,5 +1,5 @@
 module ForumTopicsHelper
-  
+
   def topic_last_post_info(topic)
     unless (topic.posts.empty?)
       post = topic.posts.last
@@ -8,9 +8,9 @@ module ForumTopicsHelper
       "No posts"
     end
   end
-  
+
   def topic_details(topic)
     "#{topic.posts.count} "+(topic.posts.count == 1 ? "post" : "posts")
   end
-  
+
 end

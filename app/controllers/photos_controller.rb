@@ -79,13 +79,13 @@ class PhotosController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
-  
+
   def setup
     @blurb_image = params[:blurb_image]
   end
-  
+
   def allow_to
     super :admin, :all => true
   end

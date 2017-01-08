@@ -23,7 +23,7 @@ var TinyMCE_NTImageLinkPlugin = {
 
 	execCommand : function(editor_id, element, command, user_interface, value) {
 		switch (command) {
-			case "mceNearTimeImageLink":				
+			case "mceNearTimeImageLink":
 				Element.hide('formatbar_link');
 				Element.hide('formatbar_attach');
 				Element.toggleWithHighlight('formatbar_image');

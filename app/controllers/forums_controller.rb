@@ -34,7 +34,7 @@ class ForumsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def update_positions
     params[:forums_list].each_index do |i|
       forum = Forum.find(params[:forums_list][i])
@@ -43,9 +43,9 @@ class ForumsController < ApplicationController
     end
     render :nothing => true
   end
-  
+
   private
-  
+
   def setup
     if params[:id]
       @forum = Forum.find(params[:id], :include => :topics, :order => "forum_topics.created_at DESC")
@@ -55,16 +55,16 @@ class ForumsController < ApplicationController
       @forum = Forum.new
     end
   end
-  
+
   def get_response options = {}
     options[:xml_object] ||= @forum
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => options[:xml_object] }
     end
   end
-  
+
   def post_response saved
     respond_to do |format|
       if saved
@@ -79,10 +79,10 @@ class ForumsController < ApplicationController
       end
     end
   end
-  
+
   def allow_to
     super :admin, :all => true
     super :active_user, :only => [:index, :show]
   end
-  
+
 end

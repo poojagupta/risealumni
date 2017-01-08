@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_facebook_session
   helper_method :facebook_session,:current_facebook_user_logedin?
 
-  before_filter :environments, :allow_to, :check_user, :login_from_cookie, :login_required, 
-    :set_profile, :pagination_defaults, 
+  before_filter :environments, :allow_to, :check_user, :login_from_cookie, :login_required,
+    :set_profile, :pagination_defaults,
     :set_default_url_options_for_mailers,
     :check_access_permissions#, :check_permissions,
   after_filter  :store_location
@@ -20,31 +20,31 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Your facebook session has been expired."
     redirect_back_or_default home_path()
  end
-  
+
   def set_profile
     @p = @u.profile if @u && @u.profile
     @is_admin = @u.is_admin? if @u
   end
-  
+
   def current_facebook_user_logedin?
     user = facebook_user
     user.nil? ? false : @u.facebook_uid == user.uid
   end
-  
+
   def facebook_user
     facebook_session.try(:session_key) ? facebook_session.user : nil
   end
-  
+
   def pagination_defaults
     @page = (params[:page] || 1).to_i
     @page = 1 if @page < 1
     @per_page = (params[:per_page] || (@test ? 1 : RESULT_PER_PAGE)).to_i
   end
-  
+
   def set_default_url_options_for_mailers
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
-  
+
   def environments
     @production = RAILS_ENV == 'production'
     @development = RAILS_ENV == 'development'
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   def flickr
     @flickr_object ||= Flickr.new(FLICKR_CACHE, FLICKR_KEY, FLICKR_SECRET)
   end
-  
+
   def flickr_images(user_name = "", tags = "", per_page = FLICKR_IMAGES, page = nil)
     unless @test
       begin
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def flickr_photosets(user_name = "")
     unless @test
       begin
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def flickr_images_by_photoset(photoset = nil, per_page = FLICKR_IMAGES, page = nil)
     unless @test
       begin
@@ -91,11 +91,11 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def search_results
     p = params[:search] ? params[:search].dup : {}
-    @title = "Search"    
-    @q , @q_val = p[:key] ? ["Search for Friends",p[:q]] : [p[:q],"Search"]      
+    @title = "Search"
+    @q , @q_val = p[:key] ? ["Search for Friends",p[:q]] : [p[:q],"Search"]
     if p[:key] && p[:key]== "blog" # For Blog Search
       @blogs = Blog.search_blog(params[:search][:q])
       render :template =>"/blogs/search_blog"
@@ -103,27 +103,27 @@ class ApplicationController < ActionController::Base
       @results = @p.search((p.delete(:q) || ''), p).paginate(:page => @page, :per_page => @per_page)
     end
   end
-  
+
   def sorted_results(*args)
     args.flatten.sort_by(&:created_at).reverse
   end
 
   protected
-  
+
   def allow_to level = nil, args = {}
     return unless level
     @level ||= []
-    @level << [level, args]  
+    @level << [level, args]
   end
-  
-=begin  
+
+=begin
   def check_permissions
     logger.debug "IN check_permissions :: @level => #{@level.inspect}"
     return failed_check_permissions if @p && !@p.is_active
     return true if @u && @u.is_admin
     raise '@level is blank. Did you override the allow_to method in your controller?' if @level.blank?
     @level.each do |l|
-      next unless (l[0] == :all) || 
+      next unless (l[0] == :all) ||
         (l[0] == :non_user && !@u) ||
         (l[0] == :user && @u) ||
         (l[0] == :owner && @p && @p.id==(params[:profile_id] || params[:id]).to_i)
@@ -137,7 +137,7 @@ class ApplicationController < ActionController::Base
     end
     return failed_check_permissions
   end
-=end  
+=end
 
   def failed_check_permissions
     if !@development
@@ -164,7 +164,7 @@ class ApplicationController < ActionController::Base
     #return failed_check_access_permissions if @p && !@p.is_active
     raise '@level is blank. Did you override the allow_to method in your controller?' if @level.blank?
     @level.each do |l|
-      next unless (l[0] == :all) || 
+      next unless (l[0] == :all) ||
         (l[0] == :admin && @u && @u.is_admin) ||
         (l[0] == :non_user && !@u) ||
         (l[0] == :user && @u) || # TODO Remove this line later we dont need this line.
@@ -180,7 +180,7 @@ class ApplicationController < ActionController::Base
     end
     return failed_check_access_permissions
   end
-  
+
   def failed_check_access_permissions
     if !@development
       flash[:error] = 'It looks like you don\'t have permission to view that page.'

@@ -8,10 +8,10 @@
     <div class="froum_page_title"><%= sanitize(@topic.title)%></div>
     <div class="forum_links">
       <% if @u.is_admin? %>
-        <%= link_to image_tag('edit.png', :title => "Edit Topic"), 
+        <%= link_to image_tag('edit.png', :title => "Edit Topic"),
                   edit_forum_topic_path(@topic.forum,@topic)%>
-        <%= link_to image_tag('delete.png', :title => "Delete Topic"), 
-                  forum_topic_path(@topic.forum,@topic), 
+        <%= link_to image_tag('delete.png', :title => "Delete Topic"),
+                  forum_topic_path(@topic.forum,@topic),
                   :method => :delete %>
       <% end %>
    </div>
@@ -30,4 +30,3 @@
  <div class="clear_div"></div>
  <span class="widget_complete_btm"></span>
 </div>
-  

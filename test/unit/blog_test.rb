@@ -10,18 +10,18 @@ class BlogTest < ActiveSupport::TestCase
       end
     end
   end
-  
+
   should_have_many :comments
-  
+
   should_belong_to :profile
-  
+
   should_require_attributes :title, :body
-  
+
   should "call param" do
     b = blogs(:first)
     assert_not_nil b.to_param
   end
- 
+
   should 'show unsent blogs' do
     assert_not_nil Blog.unsent_blogs
   end
@@ -54,11 +54,11 @@ class BlogTest < ActiveSupport::TestCase
     assert_not_nil b.sent_by
     assert_equal "De Veloper", b.sent_by
   end
-  
+
   should 'search blog'do
     assert_not_nil Blog.search_blog("blog")
   end
-  
+
 
   def test_associations
     _test_associations

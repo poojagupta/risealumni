@@ -32,9 +32,9 @@ class CreateWorkInformations < ActiveRecord::Migration
 
   def self.down
     add_column :profiles, :occupation, :string
-    add_column :profiles, :industry, :string  
+    add_column :profiles, :industry, :string
     add_column :profiles, :company_name, :string
-    add_column :profiles, :company_website, :string  
+    add_column :profiles, :company_website, :string
     add_column :profiles, :job_description, :text
     i = 0
     WorkInformation.find_each do |w|
@@ -42,10 +42,10 @@ class CreateWorkInformations < ActiveRecord::Migration
         if p
           i += 1
           p.occupation = w.occupation
-          p.industry = w.industry 
-          p.company_name = w.company_name 
-          p.company_website = w.company_website 
-          p.job_description = w.job_description 
+          p.industry = w.industry
+          p.company_name = w.company_name
+          p.company_website = w.company_website
+          p.job_description = w.job_description
           p.save!
         end
     end

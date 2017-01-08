@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
- 
+
   def create
     if params[:poll_option]
       @option = PollOption.find(params[:poll_option])

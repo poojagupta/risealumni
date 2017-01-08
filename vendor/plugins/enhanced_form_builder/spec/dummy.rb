@@ -17,9 +17,9 @@ class Dummy < ActiveRecord::Base
       ]
     end
   end
-  
+
   has_one :nothing
-  
+
   validates_presence_of :col1
   validates_format_of :col4, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 end

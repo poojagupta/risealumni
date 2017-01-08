@@ -9,8 +9,8 @@ module FlickrHelperPatch
     returning WillPaginate::Collection.new(page, per_page, total) do |pager|
       pager.replace result
     end
-  end    
-  
+  end
+
   def paginate_unsets_images(options = {})
     page     = options.delete(:page) || 1
     per_page = options.delete(:per_page) || self.per_page
@@ -20,7 +20,7 @@ module FlickrHelperPatch
     returning WillPaginate::Collection.new(page, per_page, total) do |pager|
       pager.replace result
     end
-  end    
+  end
 
-  
+
 end

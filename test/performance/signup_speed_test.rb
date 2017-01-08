@@ -19,8 +19,8 @@ class SignupSpeedTest < Test::Unit::TestCase
               :password => "lquire#{i}",
               :password_confirmation => "lquire#{i}",
               :terms_of_service => '1',
-              :first_name => "Pooja#{i}", 
-              :last_name => 'gupta', 
+              :first_name => "Pooja#{i}",
+              :last_name => 'gupta',
               :year => "2000"
             }
           }
@@ -30,10 +30,10 @@ class SignupSpeedTest < Test::Unit::TestCase
       end
       p elapsed_time
       assert elapsed_time < 24.00
-    end 
+    end
   end
 
 
-    
+
 end
 

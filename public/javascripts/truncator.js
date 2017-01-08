@@ -9,14 +9,14 @@
   $.fn.truncate = function(options) {
 
     var opts = $.extend({}, $.fn.truncate.defaults, options);
-    
+
     $(this).each(function() {
 
       var content_length = $.trim(squeeze($(this).text())).length;
       if (content_length <= opts.max_length)
         return;  // bail early if not overlong
 
-      var actual_max_length = opts.max_length - opts.more.length - 3;  // 3 for " ()"    
+      var actual_max_length = opts.max_length - opts.more.length - 3;  // 3 for " ()"
       var truncated_node = recursivelyTruncate(this, actual_max_length);
       var full_node = $(this);
 

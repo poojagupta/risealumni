@@ -7,7 +7,7 @@ module ActiveRecord
     alias_method :save, :save_new
     def save_new
       begin
-        save    
+        save
       rescue ActiveRecord::StatementInvalid => error
         if DUPLICATE_ERROR_MESSAGES.any? { |msg| error.message =~ /#{Regexp.escape(msg)}/ }
           logger.info "Duplicate Entry exception from DB"

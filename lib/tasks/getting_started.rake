@@ -31,12 +31,12 @@ namespace :lovdbyless do
   task :check do
     puts "TODO - check that all config ready"
   end
-  
+
   desc "Getting started with lovd-by-less"
   task :getting_started => [
-    "environment", 
+    "environment",
     "lovdbyless:check",
-    "gems:dependent:install", 
+    "gems:dependent:install",
     "db:create:all", "mig"
     ] do
     puts "Finished setting up enviornment and application!"

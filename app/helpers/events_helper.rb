@@ -1,5 +1,5 @@
 module EventsHelper
-  
+
   def show_event_map
     @map = GMap.new("map_div")
     @map.control_init(:large_map => true,:map_type => true)
@@ -11,5 +11,5 @@ module EventsHelper
     @map.center_zoom_init([centre.lat,centre.lng],centre.zoom)
     @map.overlay_global_init(marker,"Event_location")
    end
-   
+
 end

@@ -1,6 +1,6 @@
 class MessagesSweeper < ActionController::Caching::Sweeper
-  observe Message  
-  
+  observe Message
+
   def after_create(message)
     expire_cache(message)
   end
@@ -16,4 +16,4 @@ class MessagesSweeper < ActionController::Caching::Sweeper
     expire_fragment "profile_#{message.sender_id}/message/sent"
     expire_fragment "profile_#{message.receiver_id}/message/sent"
   end
-end 
+end

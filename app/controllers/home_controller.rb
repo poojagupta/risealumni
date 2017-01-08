@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_filter :login_required	
+  skip_before_filter :login_required
   skip_filter :store_location, :only => [:show]
   #caches_page :show
   include HomeHelper
@@ -14,7 +14,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def newest_members 
+  def newest_members
     respond_to do |wants|
       wants.html {render :action=>'index'}
       wants.rss {render :layout=>false}
@@ -38,7 +38,7 @@ class HomeController < ApplicationController
       render :action => params[:page]
     end
   end
-  
+
   def gallery
     when_fragment_expired(cache_name_flickr(params[:set_id],params[:page]),SITE_FLICKR_EXPIRE_TIME_MIN.minutes.from_now) do
       if params[:set_id]
@@ -52,10 +52,10 @@ class HomeController < ApplicationController
       end
     end
   end
-  
+
   private
 
-  def allow_to 
+  def allow_to
     super :all, :all=>true
   end
 

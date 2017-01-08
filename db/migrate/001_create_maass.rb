@@ -1,6 +1,6 @@
 class CreateMaass < ActiveRecord::Migration
   def self.up
-  
+
     create_table "blogs", :force => true do |t|
       t.string   "title"
       t.text     "body"
